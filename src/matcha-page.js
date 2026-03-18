@@ -1,33 +1,15 @@
-import { fallbackRecipes, matchaFeedUrl } from "./matcha-data.js";
+import { fallbackRecipes, matchaFacts, matchaFeedUrl } from "./matcha-data.js";
 
 const matchaGrid = document.querySelector("#matchaGrid");
 const matchaStatus = document.querySelector("#matchaStatus");
 const pourButton = document.querySelector("#pourButton");
 const matchaCup = document.querySelector("#matchaCup");
-const moodButtons = Array.from(document.querySelectorAll(".matcha-mood-chip"));
+const matchaFactText = document.querySelector("#matchaFactText");
 
 let allRecipes = fallbackRecipes;
-let activeFilter = "all";
-
-const moodToTags = {
-  all: [],
-  calm: ["hot", "easy"],
-  focus: ["latte", "hot"],
-  reset: ["iced", "easy"],
-  sweet: ["dessert", "creative"],
-  energize: ["latte", "iced"],
-};
-
-function filterRecipes(recipes, filter) {
-  const tags = moodToTags[filter] || [];
-  if (!tags.length) return recipes;
-
-  const filtered = recipes.filter((recipe) => tags.includes(recipe.tag));
-  return filtered.length ? filtered : recipes;
-}
 
 function renderRecipes(recipes) {
-  const visibleRecipes = filterRecipes(recipes, activeFilter).slice(0, 6);
+  const visibleRecipes = recipes.slice(0, 6);
 
   matchaGrid.innerHTML = visibleRecipes
     .map(
@@ -58,6 +40,11 @@ function renderRecipes(recipes) {
     .join("");
 }
 
+function renderMatchaFact() {
+  const index = new Date().getHours() % matchaFacts.length;
+  matchaFactText.textContent = matchaFacts[index];
+}
+
 async function loadRecipes() {
   try {
     const response = await fetch(matchaFeedUrl);
@@ -86,23 +73,16 @@ async function loadRecipes() {
   }
 }
 
-function setMoodFilter(filter) {
-  activeFilter = filter;
-  moodButtons.forEach((button) => {
-    button.classList.toggle("active", button.dataset.filter === filter);
-  });
-  renderRecipes(allRecipes);
-}
-
 function activatePour() {
   matchaCup.classList.remove("pouring");
   void matchaCup.offsetWidth;
   matchaCup.classList.add("pouring");
+  window.setTimeout(() => {
+    matchaCup.classList.remove("pouring");
+  }, 1200);
 }
 
-moodButtons.forEach((button) => {
-  button.addEventListener("click", () => setMoodFilter(button.dataset.filter));
-});
-
 pourButton.addEventListener("click", activatePour);
+renderMatchaFact();
+window.setInterval(renderMatchaFact, 60 * 60 * 1000);
 loadRecipes();

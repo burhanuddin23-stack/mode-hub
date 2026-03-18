@@ -11,6 +11,7 @@ import {
 const newsGrid = document.querySelector("#newsGrid");
 const newsStatus = document.querySelector("#newsStatus");
 const matchesGrid = document.querySelector("#matchesGrid");
+const latestResultCard = document.querySelector("#latestResultCard");
 const quoteText = document.querySelector("#quoteText");
 const quoteTeaser = document.querySelector("#quoteTeaser");
 const nextMatchCard = document.querySelector("#nextMatchCard");
@@ -21,14 +22,7 @@ const quizFeedback = document.querySelector("#quizFeedback");
 const siuuButton = document.querySelector("#siuuButton");
 const siuuAudio = document.querySelector("#siuuAudio");
 const celebrationLayer = document.querySelector("#celebrationLayer");
-const celebrationMessage = document.querySelector("#celebrationMessage");
-
-const hypeMessages = [
-  "SIUU",
-  "LOCK IN",
-  "CHAMPION MODE",
-  "CONFIDENCE ACTIVATED",
-];
+const celebrationGif = document.querySelector("#celebrationGif");
 
 function formatFeedDate(value) {
   if (!value) {
@@ -84,7 +78,7 @@ function getNewsImage(item, index) {
 
 function renderNews(items, live = false) {
   newsGrid.innerHTML = items
-    .slice(0, 4)
+    .slice(0, 6)
     .map(
       (item, index) => `
         <article class="news-card">
@@ -157,44 +151,87 @@ async function loadNews() {
   }
 }
 
-function renderMatches(items) {
-  matchesGrid.innerHTML = items
-    .map(
-      (match) => {
-        const goals = match.goals ?? "-";
-        const assists = match.assists ?? "-";
-        const impact =
-          typeof match.goals === "number" && typeof match.assists === "number"
-            ? match.goals + match.assists
-            : "-";
+function renderMatchCard(match, highlighted = false) {
+  const goals = match.goals ?? "-";
+  const conceded = match.assists ?? "-";
+  const goalDiff =
+    typeof match.goals === "number" && typeof match.assists === "number"
+      ? match.goals - match.assists
+      : "-";
 
-        return `
-        <article class="match-card">
-          <div class="match-header">
-            <p class="tag">${match.competition}</p>
-            <p class="update-date">${match.result}</p>
-          </div>
-          <h4>${match.team || "Ronaldo side"} vs ${match.opponent}</h4>
-          <p class="scoreline">${match.score}</p>
-          <div class="metric-grid">
-            <div class="metric">
-              <p class="metric-label">Goals</p>
-              <p class="metric-value">${goals}</p>
-            </div>
-            <div class="metric">
-              <p class="metric-label">Assists</p>
-              <p class="metric-value">${assists}</p>
-            </div>
-            <div class="metric">
-              <p class="metric-label">Impact</p>
-              <p class="metric-value">${impact}</p>
-            </div>
-          </div>
-        </article>
-      `;
-      }
+  return `
+    <article class="match-card${highlighted ? " match-card-highlighted" : ""}">
+      <div class="match-header">
+        <p class="tag">${match.competition}</p>
+        <p class="update-date">${match.dateLabel || match.result}</p>
+      </div>
+      <h4>${match.team || "Ronaldo side"} vs ${match.opponent}</h4>
+      <p class="scoreline">${match.score}</p>
+      <div class="metric-grid">
+        <div class="metric">
+          <p class="metric-label">Team Goals</p>
+          <p class="metric-value">${goals}</p>
+        </div>
+        <div class="metric">
+          <p class="metric-label">Conceded</p>
+          <p class="metric-value">${conceded}</p>
+        </div>
+        <div class="metric">
+          <p class="metric-label">Goal Diff</p>
+          <p class="metric-value">${goalDiff}</p>
+        </div>
+      </div>
+      <p class="match-result-label">${match.result}</p>
+    </article>
+  `;
+}
+
+function renderMatches(items) {
+  const [latestMatch, ...restMatches] = items;
+
+  latestResultCard.innerHTML = latestMatch
+    ? `
+      <p class="panel-label">Latest Result</p>
+      ${renderMatchCard(latestMatch, true)}
+    `
+    : "";
+
+  matchesGrid.innerHTML = restMatches
+    .map(
+      (match) => renderMatchCard(match)
     )
     .join("");
+}
+
+function updateMatchCountdown(match) {
+  if (!match.timestamp) {
+    return;
+  }
+
+  const target = new Date(match.timestamp);
+  if (Number.isNaN(target.getTime())) {
+    return;
+  }
+
+  const render = () => {
+    const diff = target.getTime() - Date.now();
+    const countdownNode = nextMatchCard.querySelector(".next-match-countdown");
+    if (!countdownNode) return;
+
+    if (diff <= 0) {
+      countdownNode.textContent = "Kickoff time";
+      return;
+    }
+
+    const totalMinutes = Math.floor(diff / 60000);
+    const days = Math.floor(totalMinutes / 1440);
+    const hours = Math.floor((totalMinutes % 1440) / 60);
+    const minutes = totalMinutes % 60;
+    countdownNode.textContent = `${days}d ${hours}h ${minutes}m`;
+    window.setTimeout(render, 60000);
+  };
+
+  render();
 }
 
 async function loadMatches() {
@@ -230,8 +267,10 @@ function renderNextMatch(match) {
     <h3>${match.dateLabel}</h3>
     <p class="next-match-opponent">${match.team || "Ronaldo side"} vs ${match.opponent}</p>
     <p class="next-match-detail">${match.competition} · ${match.timeLabel}</p>
+    <p class="next-match-countdown"></p>
     <p class="next-match-note">${match.note}</p>
   `;
+  updateMatchCountdown(match);
 }
 
 function renderQuiz(quizzes) {
@@ -305,21 +344,21 @@ function playSiuuSound() {
 }
 
 function activateSiuu() {
-  const buttonBox = siuuButton.getBoundingClientRect();
-  const originX = buttonBox.left + buttonBox.width / 2;
-  const originY = buttonBox.top + buttonBox.height / 2;
-  const message = hypeMessages[Math.floor(Math.random() * hypeMessages.length)];
+  if (celebrationGif) {
+    const nextSrc = "./public/ronaldo-siuu.gif";
+    celebrationGif.src = "";
+    celebrationGif.offsetHeight;
+    celebrationGif.src = `${nextSrc}?v=${Date.now()}`;
+  }
 
-  celebrationMessage.textContent = message;
   celebrationLayer.classList.add("active");
   document.body.classList.add("celebrating");
   playSiuuSound();
-  createBurst(originX, originY);
 
   window.setTimeout(() => {
     celebrationLayer.classList.remove("active");
     document.body.classList.remove("celebrating");
-  }, 1100);
+  }, 2400);
 }
 
 function init() {

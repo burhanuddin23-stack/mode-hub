@@ -14,13 +14,15 @@
     <div class="page-shell">
       <header class="article-header">
         <a class="back-link" href="./index.html">Home</a>
-        <div class="article-title-block">
-          <div class="flag-badge" aria-label="Portugal flag">
+        <div class="article-header-main">
+          <div class="flag-badge flag-left" aria-label="Portugal flag">
             <span class="flag-portugal" aria-hidden="true"></span>
           </div>
+          <div class="article-title-block">
           <p class="eyebrow">Ronaldo Desk</p>
           <h1>Ronaldo Mode</h1>
           <p class="article-subtitle">Confidence, football, and a little SIUU energy.</p>
+          </div>
         </div>
       </header>
 
@@ -29,10 +31,6 @@
           <div class="hero-copy">
             <p class="eyebrow">Lead Story</p>
             <h2>Confidence, discipline, and a little SIUU energy.</h2>
-            <p class="hero-intro">
-              For the days you need confidence, discipline, and a little bit of
-              SIUU energy.
-            </p>
             <div class="hero-actions">
               <a class="primary-link" href="#news">Read news</a>
             </div>
@@ -73,6 +71,14 @@
               Recent results showing the team scoreline from Ronaldo's current side.
             </p>
           </div>
+          <div class="matches-feature-row">
+            <div class="latest-result-card" id="latestResultCard"></div>
+            <article class="panel quote-panel quote-inline-panel">
+              <p class="panel-label">Quote of the Day</p>
+              <blockquote id="quoteText"></blockquote>
+              <p class="quote-source">Cristiano Ronaldo mode, all day.</p>
+            </article>
+          </div>
           <div class="matches-grid" id="matchesGrid"></div>
         </section>
 
@@ -95,42 +101,22 @@
           </article>
         </section>
 
-        <section class="section-block mindset-block" id="mindset">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">Editorial Note</p>
-              <h3>Quote of the Day</h3>
-            </div>
-            <p class="section-note">
-              A compact confidence boost to round out the page.
-            </p>
-          </div>
-
-          <article class="panel quote-panel single-quote-panel">
-            <p class="panel-label">Featured Quote</p>
-            <blockquote id="quoteText"></blockquote>
-            <p class="quote-source">Cristiano Ronaldo mode, all day.</p>
-          </article>
-        </section>
       </main>
     </div>
 
     <div class="siuu-dock">
-      <div class="ronaldo-gif-wrap" aria-hidden="true">
-        <img
-          class="ronaldo-gif"
-          src="./public/ronaldo-siuu.gif"
-          alt=""
-          loading="lazy"
-        />
-      </div>
       <button class="siuu-fab" id="siuuButton" type="button">SIUU</button>
     </div>
 
     <audio id="siuuAudio" preload="auto" src="./public/ronaldo-siuu.mp3"></audio>
 
     <div class="celebration-layer" id="celebrationLayer" aria-hidden="true">
-      <div class="celebration-message" id="celebrationMessage"></div>
+      <img
+        class="celebration-gif"
+        id="celebrationGif"
+        src="./public/ronaldo-siuu.gif"
+        alt=""
+      />
     </div>
 
     <script type="module" src="./src/ronaldo-page.js"></script>

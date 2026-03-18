@@ -34,6 +34,39 @@ export const fallbackNews = [
       "https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=900&q=80",
     link: "#",
   },
+  {
+    title: "Ronaldo discussion stays central in the latest football cycle",
+    description:
+      "Fresh coverage keeps circling around form, standards, and the way each result feeds the wider legacy conversation.",
+    category: "news",
+    date: "15 Mar 2026",
+    source: "Ronaldo Mode fallback",
+    image:
+      "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=900&q=80",
+    link: "#",
+  },
+  {
+    title: "Supporters keep scanning the next fixture for another statement game",
+    description:
+      "Preview talk remains focused on output, leadership, and whether another decisive attacking contribution is coming.",
+    category: "match",
+    date: "14 Mar 2026",
+    source: "Ronaldo Mode fallback",
+    image:
+      "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=900&q=80",
+    link: "#",
+  },
+  {
+    title: "Training clips reinforce the same message: routine over noise",
+    description:
+      "Short video snippets from training continue to feed the disciplined, preparation-first image around him.",
+    category: "training",
+    date: "13 Mar 2026",
+    source: "Ronaldo Mode fallback",
+    image:
+      "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=900&q=80",
+    link: "#",
+  },
 ];
 
 export const recentMatches = [
@@ -41,8 +74,9 @@ export const recentMatches = [
     team: "Al Nassr",
     opponent: "Al Hilal",
     score: "2 - 1",
-    goals: 1,
+    goals: 2,
     assists: 1,
+    dateLabel: "18 Mar 2026",
     competition: "Saudi Pro League",
     result: "Win",
   },
@@ -50,8 +84,9 @@ export const recentMatches = [
     team: "Al Nassr",
     opponent: "Al Ahli",
     score: "3 - 0",
-    goals: 2,
+    goals: 3,
     assists: 0,
+    dateLabel: "15 Mar 2026",
     competition: "King Cup",
     result: "Win",
   },
@@ -60,7 +95,8 @@ export const recentMatches = [
     opponent: "Al Ittihad",
     score: "1 - 1",
     goals: 1,
-    assists: 0,
+    assists: 1,
+    dateLabel: "12 Mar 2026",
     competition: "Saudi Pro League",
     result: "Draw",
   },

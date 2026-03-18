@@ -18,6 +18,29 @@ function formatDateLabel(value) {
   }).format(date);
 }
 
+function formatTimeLabel(timestamp, fallbackTime) {
+  if (timestamp) {
+    const date = new Date(timestamp);
+    if (!Number.isNaN(date.getTime())) {
+      return new Intl.DateTimeFormat("en", {
+        hour: "numeric",
+        minute: "2-digit",
+        timeZoneName: "short",
+      }).format(date);
+    }
+  }
+
+  return fallbackTime || "Time TBD";
+}
+
+function normalizeTimestamp(dateEvent, timeValue) {
+  if (!dateEvent) return "";
+  if (!timeValue) return `${dateEvent}T18:00:00Z`;
+
+  const cleanTime = timeValue.replace("Z", "");
+  return `${dateEvent}T${cleanTime}Z`;
+}
+
 function getResult(homeScore, awayScore, isHomeTeam) {
   if (homeScore == null || awayScore == null) {
     return "Scheduled";
@@ -40,14 +63,14 @@ function getResult(homeScore, awayScore, isHomeTeam) {
 function mapNextMatch(event) {
   const isHomeTeam = event.idHomeTeam === TEAM_ID;
   const opponent = isHomeTeam ? event.strAwayTeam : event.strHomeTeam;
-  const timestamp = event.strTimestamp || event.dateEvent;
+  const timestamp = event.strTimestamp || normalizeTimestamp(event.dateEvent, event.strTime);
 
   return {
     team: "Al Nassr",
     opponent,
     competition: event.strLeague || "Competition TBD",
     dateLabel: formatDateLabel(timestamp),
-    timeLabel: event.strTimeLocal || event.strTime || "Time TBD",
+    timeLabel: formatTimeLabel(timestamp, event.strTimeLocal || event.strTime),
     timestamp,
     note: "Live fixture from TheSportsDB.",
   };
@@ -60,13 +83,15 @@ function mapRecentMatch(event) {
   const awayScore = Number(event.intAwayScore);
   const teamScore = isHomeTeam ? homeScore : awayScore;
   const opponentScore = isHomeTeam ? awayScore : homeScore;
+  const dateLabel = formatDateLabel(event.dateEvent || event.strTimestamp);
 
   return {
     team: "Al Nassr",
     opponent,
     score: `${teamScore} - ${opponentScore}`,
-    goals: null,
-    assists: null,
+    goals: teamScore,
+    assists: opponentScore,
+    dateLabel,
     competition: event.strLeague || "Competition TBD",
     result: getResult(homeScore, awayScore, isHomeTeam),
   };

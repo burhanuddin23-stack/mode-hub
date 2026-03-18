@@ -56,3 +56,12 @@ export const fallbackRecipes = [
     tag: "creative",
   },
 ];
+
+export const matchaFacts = [
+  "Traditional matcha uses the whole tea leaf in powdered form, which is part of why its flavor feels fuller.",
+  "Ceremonial grade matcha is usually chosen for drinking straight, while culinary grade is often used in recipes.",
+  "A bamboo whisk is used to aerate matcha and create the soft foam people look for in a good bowl.",
+  "Shade-growing the tea leaves before harvest helps increase chlorophyll and contributes to matcha's color.",
+  "Matcha shows up beautifully in drinks, desserts, and simple breakfast recipes because it holds flavor well.",
+  "The calm-focus reputation of matcha is often tied to the combination of caffeine and L-theanine in green tea.",
+];
