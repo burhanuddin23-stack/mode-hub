@@ -2,6 +2,7 @@ import {
   dailyMoods,
   dailyQuizzes,
   fallbackNews,
+  matchesFeedUrl,
   newsFeedUrl,
   nextMatch,
   quotes,
@@ -162,7 +163,15 @@ async function loadNews() {
 function renderMatches(items) {
   matchesGrid.innerHTML = items
     .map(
-      (match) => `
+      (match) => {
+        const goals = match.goals ?? "-";
+        const assists = match.assists ?? "-";
+        const impact =
+          typeof match.goals === "number" && typeof match.assists === "number"
+            ? match.goals + match.assists
+            : "-";
+
+        return `
         <article class="match-card">
           <div class="match-header">
             <p class="tag">${match.competition}</p>
@@ -173,21 +182,42 @@ function renderMatches(items) {
           <div class="metric-grid">
             <div class="metric">
               <p class="metric-label">Goals</p>
-              <p class="metric-value">${match.goals}</p>
+              <p class="metric-value">${goals}</p>
             </div>
             <div class="metric">
               <p class="metric-label">Assists</p>
-              <p class="metric-value">${match.assists}</p>
+              <p class="metric-value">${assists}</p>
             </div>
             <div class="metric">
               <p class="metric-label">Impact</p>
-              <p class="metric-value">${match.goals + match.assists}</p>
+              <p class="metric-value">${impact}</p>
             </div>
           </div>
         </article>
-      `
+      `;
+      }
     )
     .join("");
+}
+
+async function loadMatches() {
+  try {
+    const response = await fetch(matchesFeedUrl);
+    if (!response.ok) {
+      throw new Error(`Matches request failed: ${response.status}`);
+    }
+
+    const payload = await response.json();
+    const liveRecentMatches = payload.recentMatches?.length ? payload.recentMatches : recentMatches;
+    const liveNextMatch = payload.nextMatch || nextMatch;
+
+    renderMatches(liveRecentMatches);
+    renderNextMatch(liveNextMatch);
+  } catch (error) {
+    renderMatches(recentMatches);
+    renderNextMatch(nextMatch);
+    console.error(error);
+  }
 }
 
 function renderMindset(moods, quotesList) {
@@ -324,12 +354,11 @@ function activateSiuu() {
 }
 
 function init() {
-  renderMatches(recentMatches);
   renderMindset(dailyMoods, quotes);
   renderRefreshMeta();
-  renderNextMatch(nextMatch);
   renderQuiz(dailyQuizzes);
   loadNews();
+  loadMatches();
   siuuButton.addEventListener("click", activateSiuu);
 }
 

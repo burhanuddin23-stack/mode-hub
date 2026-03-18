@@ -124,3 +124,4 @@ export const nextMatch = {
 };
 
 export const newsFeedUrl = "/api/ronaldo-news";
+export const matchesFeedUrl = "/api/ronaldo-matches";

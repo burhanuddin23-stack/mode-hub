@@ -7,6 +7,7 @@ Base home page plus a dedicated Ronaldo page, with live Ronaldo news served thro
 ```text
 .
 ├── api
+│   ├── ronaldo-matches.js
 │   └── ronaldo-news.js
 ├── index.html
 ├── ronaldo.html
@@ -37,7 +38,9 @@ Then open:
 - `ronaldo.html` is the dedicated Ronaldo page.
 - Only the news section attempts a live fetch.
 - In production on Vercel, the news section fetches from `/api/ronaldo-news`.
+- In production on Vercel, the next-match and recent-match sections fetch from `/api/ronaldo-matches`.
 - If the live news fetch fails, fallback cards from `src/ronaldo-data.js` are shown instead.
+- If the live match fetch fails, fallback match data from `src/ronaldo-data.js` is shown instead.
 - The daily quiz changes based on the day of the month.
 
 ## Deploy on Vercel
