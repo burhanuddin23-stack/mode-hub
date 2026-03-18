@@ -7,13 +7,17 @@ Base home page plus a dedicated Ronaldo page, with live Ronaldo news served thro
 ```text
 .
 ├── api
+│   ├── matcha-recipes.js
 │   ├── ronaldo-matches.js
 │   └── ronaldo-news.js
 ├── index.html
+├── matcha.html
 ├── ronaldo.html
 ├── styles.css
 ├── src
 │   ├── home-page.js
+│   ├── matcha-data.js
+│   ├── matcha-page.js
 │   ├── ronaldo-data.js
 │   └── ronaldo-page.js
 ├── vercel.json
@@ -37,11 +41,14 @@ Then open:
 
 - `index.html` is the base home page with placeholder tabs and shortcuts.
 - `ronaldo.html` is the dedicated Ronaldo page.
+- `matcha.html` is the dedicated Matcha page.
 - Only the news section attempts a live fetch.
 - In production on Vercel, the news section fetches from `/api/ronaldo-news`.
 - In production on Vercel, the next-match and recent-match sections fetch from `/api/ronaldo-matches`.
+- In production on Vercel, the Matcha page fetches recipe cards from `/api/matcha-recipes`.
 - If the live news fetch fails, fallback cards from `src/ronaldo-data.js` are shown instead.
 - If the live match fetch fails, fallback match data from `src/ronaldo-data.js` is shown instead.
+- If the live matcha recipe fetch fails, fallback recipe cards from `src/matcha-data.js` are shown instead.
 - The daily quiz changes based on the day of the month.
 
 ## Deploy on Vercel
@@ -55,6 +62,7 @@ After deploy:
 
 - Home page will be `/`
 - Ronaldo page will be `/ronaldo`
+- Matcha page will be `/matcha`
 - Live news endpoint will be `/api/ronaldo-news`
 
 ## Important

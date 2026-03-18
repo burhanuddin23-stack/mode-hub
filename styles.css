@@ -332,6 +332,12 @@ blockquote,
     linear-gradient(135deg, rgba(127, 145, 113, 0.12), rgba(255, 255, 255, 0));
 }
 
+.shortcut-card.featured-matcha {
+  background:
+    linear-gradient(180deg, rgba(246, 249, 242, 0.8), rgba(255, 255, 255, 0.9)),
+    linear-gradient(135deg, rgba(95, 111, 82, 0.14), rgba(219, 228, 210, 0.32));
+}
+
 .shortcut-card.muted {
   background: rgba(255, 255, 255, 0.62);
 }
@@ -357,6 +363,10 @@ blockquote,
 .badge-live {
   color: #fff;
   background: var(--team-red);
+}
+
+.badge-matcha {
+  background: var(--matcha-dark);
 }
 
 .badge-placeholder {
@@ -696,6 +706,213 @@ blockquote,
   max-width: 760px;
 }
 
+body.matcha-body {
+  background:
+    radial-gradient(circle at top left, rgba(127, 145, 113, 0.22), transparent 26%),
+    radial-gradient(circle at right top, rgba(219, 228, 210, 0.7), transparent 24%),
+    linear-gradient(180deg, #eef2e7 0%, #f5f7f1 48%, #f7f7f2 100%);
+}
+
+.matcha-hero {
+  background:
+    linear-gradient(180deg, rgba(248, 250, 244, 0.82), rgba(255, 255, 255, 0.84)),
+    linear-gradient(135deg, rgba(127, 145, 113, 0.16), rgba(255, 255, 255, 0));
+}
+
+.matcha-side-panel,
+.matcha-mood-card,
+.matcha-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(249, 251, 246, 0.92));
+}
+
+.matcha-mood-card {
+  padding: 1rem;
+  border-radius: 24px;
+  border: 1px solid rgba(95, 111, 82, 0.12);
+}
+
+.matcha-mood-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.85rem;
+}
+
+.matcha-mood-chip {
+  min-height: 36px;
+  padding: 0 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(95, 111, 82, 0.14);
+  background: rgba(237, 242, 232, 0.9);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.matcha-mood-chip.active {
+  background: var(--matcha-dark);
+  color: #fff;
+  border-color: transparent;
+}
+
+.matcha-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+.matcha-card {
+  overflow: hidden;
+  border-radius: 26px;
+  border: 1px solid rgba(95, 111, 82, 0.12);
+  box-shadow: var(--shadow-soft);
+}
+
+.matcha-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: linear-gradient(180deg, #e7ecdf, #eef3e9);
+}
+
+.matcha-copy {
+  padding: 1rem;
+}
+
+.matcha-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  margin-top: 0.85rem;
+  color: var(--matcha-dark);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.matcha-pour-dock {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 8;
+  display: flex;
+  align-items: end;
+  gap: 0.8rem;
+}
+
+.matcha-fab {
+  min-width: 130px;
+  height: 56px;
+  padding: 0 1.1rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--matcha-dark);
+  color: #fff;
+  font: inherit;
+  font-weight: 800;
+  box-shadow: 0 18px 34px rgba(95, 111, 82, 0.24);
+  cursor: pointer;
+}
+
+.matcha-cup {
+  position: relative;
+  width: 88px;
+  height: 118px;
+}
+
+.cup-rim {
+  position: absolute;
+  left: 8px;
+  top: 10px;
+  width: 72px;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid rgba(95, 111, 82, 0.2);
+  z-index: 3;
+}
+
+.cup-fill {
+  position: absolute;
+  left: 13px;
+  bottom: 9px;
+  width: 62px;
+  height: 0;
+  border-radius: 0 0 24px 24px;
+  background: linear-gradient(180deg, rgba(165, 183, 144, 0.95), rgba(95, 111, 82, 0.95));
+  transition: height 900ms ease;
+}
+
+.cup-straw {
+  position: absolute;
+  right: 14px;
+  top: -2px;
+  width: 6px;
+  height: 60px;
+  border-radius: 999px;
+  background: rgba(127, 145, 113, 0.72);
+  transform: rotate(10deg);
+}
+
+.cup-ice {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: inset 0 0 0 1px rgba(95, 111, 82, 0.08);
+  z-index: 2;
+}
+
+.ice-one {
+  left: 18px;
+  bottom: 40px;
+}
+
+.ice-two {
+  left: 36px;
+  bottom: 52px;
+}
+
+.ice-three {
+  left: 52px;
+  bottom: 34px;
+}
+
+.matcha-cup::before {
+  content: "";
+  position: absolute;
+  inset: 12px 8px 8px;
+  border-radius: 0 0 24px 24px;
+  background: rgba(255, 255, 255, 0.28);
+  border: 2px solid rgba(95, 111, 82, 0.18);
+  backdrop-filter: blur(8px);
+}
+
+.matcha-cup::after {
+  content: "";
+  position: absolute;
+  left: 44px;
+  top: -36px;
+  width: 10px;
+  height: 44px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(95, 111, 82, 0), rgba(95, 111, 82, 0.85));
+  opacity: 0;
+  transform: translateY(-12px);
+}
+
+.matcha-cup.pouring::after {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.matcha-cup.pouring .cup-fill {
+  height: 74px;
+}
+
 blockquote {
   margin-top: 0.7rem;
   font-size: clamp(1.9rem, 7vw, 3rem);
@@ -896,7 +1113,8 @@ body.celebrating .ronaldo-figure {
 
   .news-grid,
   .matches-grid,
-  .shortcut-grid {
+  .shortcut-grid,
+  .matcha-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

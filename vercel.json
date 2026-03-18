@@ -4,6 +4,10 @@
     {
       "source": "/ronaldo",
       "destination": "/ronaldo.html"
+    },
+    {
+      "source": "/matcha",
+      "destination": "/matcha.html"
     }
   ],
   "headers": [
