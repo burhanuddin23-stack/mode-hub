@@ -114,20 +114,22 @@
       </main>
     </div>
 
-    <button class="break-fab" id="breakFab" type="button" aria-haspopup="dialog">
-      <span class="break-fab-icon">!</span>
-      <span>Click in times of extreme workload</span>
+    <button class="break-orb" type="button" aria-label="Click in times of extreme workload">
+      <svg class="break-orb-ring" viewBox="0 0 120 120" aria-hidden="true">
+        <defs>
+          <path
+            id="breakOrbPath"
+            d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"
+          />
+        </defs>
+        <text>
+          <textPath href="#breakOrbPath" startOffset="0%">
+            CLICK IN TIMES OF EXTREME WORKLOAD • CAUTION •
+          </textPath>
+        </text>
+      </svg>
+      <span class="break-orb-center">Break</span>
     </button>
-
-    <div class="break-overlay" id="breakOverlay" aria-hidden="true">
-      <div class="break-modal">
-        <button class="break-close" id="breakClose" type="button" aria-label="Close break mode">
-          Close
-        </button>
-        <div class="break-loading" id="breakLoading"></div>
-        <div class="break-content" id="breakContent"></div>
-      </div>
-    </div>
 
     <script type="module" src="./src/home-page.js"></script>
   </body>

@@ -31,6 +31,7 @@ function extractCards(html) {
   const regex =
     /<a[^>]+href="(\/blogs\/matcha-recipes\/[^"]+)"[^>]*>([\s\S]*?)<\/a>/gi;
   const seenLinks = new Set();
+  const seenTitles = new Set();
   let match;
 
   while ((match = regex.exec(html)) && cards.length < 6) {
@@ -45,8 +46,11 @@ function extractCards(html) {
     const lines = text.split(/\s{2,}|\n+/).map((line) => line.trim()).filter(Boolean);
     const title = lines[lines.length - 1];
     if (!title || title.length < 6) continue;
+    const normalizedTitle = title.toLowerCase();
+    if (seenTitles.has(normalizedTitle)) continue;
 
     seenLinks.add(link);
+    seenTitles.add(normalizedTitle);
     cards.push({ link, title });
   }
 
