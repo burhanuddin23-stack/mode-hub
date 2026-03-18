@@ -119,8 +119,8 @@ export const nextMatch = {
   opponent: "Al Najma",
   competition: "Saudi Pro League",
   dateLabel: "03 Apr 2026",
-  timeLabel: "20:00",
-  note: "Next known fixture shown from the latest schedule check.",
+  timeLabel: "Time varies by locale",
+  note: "Next known fixture as listed on ESPN's Al Nassr fixtures page on 18 Mar 2026.",
 };
 
 export const newsFeedUrl = "/api/ronaldo-news";
