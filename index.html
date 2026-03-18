@@ -35,12 +35,26 @@
             </p>
           </div>
           <div class="home-summary-card">
-            <p class="summary-label">Live Shortcut</p>
+            <p class="summary-label">Match Preview</p>
             <h2>Ronaldo Mode</h2>
             <p>
-              Includes live news, next match date, daily quiz, and a dedicated
+              Includes live news, next match date, a daily quiz, and a cleaner
               editorial page.
             </p>
+            <div class="home-preview-meta">
+              <div class="preview-line">
+                <span>Next match</span>
+                <strong id="homeNextMatch">Loading...</strong>
+              </div>
+              <div class="preview-line">
+                <span>Countdown</span>
+                <strong id="homeCountdown">Calculating...</strong>
+              </div>
+              <div class="preview-line">
+                <span>Quick note</span>
+                <strong>Portugal captain. Al Nassr forward. CR7.</strong>
+              </div>
+            </div>
             <a class="button-primary" href="./ronaldo.html">Open Ronaldo Mode</a>
           </div>
         </section>
@@ -94,5 +108,7 @@
         </section>
       </main>
     </div>
+
+    <script type="module" src="./src/home-page.js"></script>
   </body>
 </html>

@@ -43,10 +43,12 @@ function mapNextMatch(event) {
   const timestamp = event.strTimestamp || event.dateEvent;
 
   return {
+    team: "Al Nassr",
     opponent,
     competition: event.strLeague || "Competition TBD",
     dateLabel: formatDateLabel(timestamp),
     timeLabel: event.strTimeLocal || event.strTime || "Time TBD",
+    timestamp,
     note: "Live fixture from TheSportsDB.",
   };
 }
@@ -60,6 +62,7 @@ function mapRecentMatch(event) {
   const opponentScore = isHomeTeam ? awayScore : homeScore;
 
   return {
+    team: "Al Nassr",
     opponent,
     score: `${teamScore} - ${opponentScore}`,
     goals: null,

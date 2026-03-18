@@ -38,6 +38,7 @@ export const fallbackNews = [
 
 export const recentMatches = [
   {
+    team: "Al Nassr",
     opponent: "Al Hilal",
     score: "2 - 1",
     goals: 1,
@@ -46,6 +47,7 @@ export const recentMatches = [
     result: "Win",
   },
   {
+    team: "Al Nassr",
     opponent: "Al Ahli",
     score: "3 - 0",
     goals: 2,
@@ -54,6 +56,7 @@ export const recentMatches = [
     result: "Win",
   },
   {
+    team: "Al Nassr",
     opponent: "Al Ittihad",
     score: "1 - 1",
     goals: 1,
@@ -68,24 +71,6 @@ export const quotes = [
   "Pressure is only loud when your standards are quiet.",
   "Confidence looks different when the work is already done.",
   "Stay hungry enough that yesterday’s win feels small.",
-];
-
-export const dailyMoods = [
-  {
-    label: "Focus Level",
-    value: "Relentless",
-    description: "Tunnel vision for the next rep, the next sprint, the next result.",
-  },
-  {
-    label: "Confidence Meter",
-    value: "Elite",
-    description: "Calm, sharp, and not asking permission to play big.",
-  },
-  {
-    label: "Fan Energy",
-    value: "SIUU Ready",
-    description: "Built for momentum swings, highlight moments, and clean finishes.",
-  },
 ];
 
 export const dailyQuizzes = [
@@ -116,10 +101,12 @@ export const dailyQuizzes = [
 ];
 
 export const nextMatch = {
+  team: "Al Nassr",
   opponent: "Al Najma",
   competition: "Saudi Pro League",
   dateLabel: "03 Apr 2026",
   timeLabel: "Time varies by locale",
+  timestamp: "2026-04-03T18:00:00Z",
   note: "Next known fixture as listed on ESPN's Al Nassr fixtures page on 18 Mar 2026.",
 };
 

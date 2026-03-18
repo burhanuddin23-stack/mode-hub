@@ -13,6 +13,7 @@ Base home page plus a dedicated Ronaldo page, with live Ronaldo news served thro
 ├── ronaldo.html
 ├── styles.css
 ├── src
+│   ├── home-page.js
 │   ├── ronaldo-data.js
 │   └── ronaldo-page.js
 ├── vercel.json

@@ -1,5 +1,4 @@
 import {
-  dailyMoods,
   dailyQuizzes,
   fallbackNews,
   matchesFeedUrl,
@@ -7,16 +6,13 @@ import {
   nextMatch,
   quotes,
   recentMatches,
-  refreshHours,
 } from "./ronaldo-data.js";
 
 const newsGrid = document.querySelector("#newsGrid");
 const newsStatus = document.querySelector("#newsStatus");
 const matchesGrid = document.querySelector("#matchesGrid");
 const quoteText = document.querySelector("#quoteText");
-const moodStack = document.querySelector("#moodStack");
-const moodGrid = document.querySelector("#moodGrid");
-const refreshMeta = document.querySelector("#refreshMeta");
+const quoteTeaser = document.querySelector("#quoteTeaser");
 const nextMatchCard = document.querySelector("#nextMatchCard");
 const quizLabel = document.querySelector("#quizLabel");
 const quizQuestion = document.querySelector("#quizQuestion");
@@ -177,7 +173,7 @@ function renderMatches(items) {
             <p class="tag">${match.competition}</p>
             <p class="update-date">${match.result}</p>
           </div>
-          <h4>vs ${match.opponent}</h4>
+          <h4>${match.team || "Ronaldo side"} vs ${match.opponent}</h4>
           <p class="scoreline">${match.score}</p>
           <div class="metric-grid">
             <div class="metric">
@@ -220,56 +216,18 @@ async function loadMatches() {
   }
 }
 
-function renderMindset(moods, quotesList) {
+function renderQuote(quotesList) {
   const dayIndex = new Date().getDate() % quotesList.length;
-  quoteText.textContent = quotesList[dayIndex];
-
-  moodStack.innerHTML = moods
-    .map(
-      (mood) => `
-        <div class="mood-chip">
-          <span class="eyebrow">${mood.label}</span>
-          <span class="mood-label">${mood.value}</span>
-          <span class="mood-copy">${mood.description}</span>
-        </div>
-      `
-    )
-    .join("");
-
-  moodGrid.innerHTML = moods
-    .map(
-      (mood) => `
-        <div class="hero-pill">
-          <span>${mood.label}</span>
-          <strong>${mood.value}</strong>
-        </div>
-      `
-    )
-    .join("");
-}
-
-function renderRefreshMeta() {
-  const now = new Date();
-  const nextRefresh = new Date(now.getTime() + refreshHours * 60 * 60 * 1000);
-  const formatter = new Intl.DateTimeFormat("en", {
-    day: "2-digit",
-    month: "short",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
-  refreshMeta.innerHTML = `
-    <span>Live news enabled</span>
-    <span>Opened ${formatter.format(now)}</span>
-    <span>Suggested refresh ${formatter.format(nextRefresh)}</span>
-  `;
+  const quote = quotesList[dayIndex];
+  quoteText.textContent = quote;
+  quoteTeaser.textContent = quote;
 }
 
 function renderNextMatch(match) {
   nextMatchCard.innerHTML = `
     <p class="hero-stat-label">Next Match Date</p>
     <h3>${match.dateLabel}</h3>
-    <p class="next-match-opponent">vs ${match.opponent}</p>
+    <p class="next-match-opponent">${match.team || "Ronaldo side"} vs ${match.opponent}</p>
     <p class="next-match-detail">${match.competition} · ${match.timeLabel}</p>
     <p class="next-match-note">${match.note}</p>
   `;
@@ -336,6 +294,18 @@ function createBurst(originX, originY) {
   }
 }
 
+function playSiuuSound() {
+  const synth = window.speechSynthesis;
+  if (synth) {
+    const utterance = new SpeechSynthesisUtterance("Siuuu");
+    utterance.rate = 0.82;
+    utterance.pitch = 0.72;
+    utterance.volume = 1;
+    synth.cancel();
+    synth.speak(utterance);
+  }
+}
+
 function activateSiuu() {
   const buttonBox = siuuButton.getBoundingClientRect();
   const originX = buttonBox.left + buttonBox.width / 2;
@@ -345,6 +315,7 @@ function activateSiuu() {
   celebrationMessage.textContent = message;
   celebrationLayer.classList.add("active");
   document.body.classList.add("celebrating");
+  playSiuuSound();
   createBurst(originX, originY);
 
   window.setTimeout(() => {
@@ -354,8 +325,7 @@ function activateSiuu() {
 }
 
 function init() {
-  renderMindset(dailyMoods, quotes);
-  renderRefreshMeta();
+  renderQuote(quotes);
   renderQuiz(dailyQuizzes);
   loadNews();
   loadMatches();
