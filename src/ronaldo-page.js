@@ -315,25 +315,6 @@ function renderQuiz(quizzes) {
   });
 }
 
-function createBurst(originX, originY) {
-  for (let index = 0; index < 18; index += 1) {
-    const burst = document.createElement("span");
-    const angle = (Math.PI * 2 * index) / 18;
-    const distance = 90 + Math.random() * 120;
-    const x = Math.cos(angle) * distance;
-    const y = Math.sin(angle) * distance;
-
-    burst.className = "burst";
-    burst.style.left = `${originX}px`;
-    burst.style.top = `${originY}px`;
-    burst.style.setProperty("--x", `${x}px`);
-    burst.style.setProperty("--y", `${y}px`);
-    celebrationLayer.appendChild(burst);
-
-    window.setTimeout(() => burst.remove(), 920);
-  }
-}
-
 function playSiuuSound() {
   if (siuuAudio) {
     siuuAudio.currentTime = 0;
