@@ -19,6 +19,7 @@ const quizQuestion = document.querySelector("#quizQuestion");
 const quizOptions = document.querySelector("#quizOptions");
 const quizFeedback = document.querySelector("#quizFeedback");
 const siuuButton = document.querySelector("#siuuButton");
+const siuuAudio = document.querySelector("#siuuAudio");
 const celebrationLayer = document.querySelector("#celebrationLayer");
 const celebrationMessage = document.querySelector("#celebrationMessage");
 
@@ -295,14 +296,11 @@ function createBurst(originX, originY) {
 }
 
 function playSiuuSound() {
-  const synth = window.speechSynthesis;
-  if (synth) {
-    const utterance = new SpeechSynthesisUtterance("Siuuu");
-    utterance.rate = 0.82;
-    utterance.pitch = 0.72;
-    utterance.volume = 1;
-    synth.cancel();
-    synth.speak(utterance);
+  if (siuuAudio) {
+    siuuAudio.currentTime = 0;
+    siuuAudio.play().catch((error) => {
+      console.error(error);
+    });
   }
 }
 

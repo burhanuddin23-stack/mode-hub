@@ -116,16 +116,18 @@
     </div>
 
     <div class="siuu-dock">
-      <div class="ronaldo-figure" id="ronaldoFigure" aria-hidden="true">
-        <span class="figure-head"></span>
-        <span class="figure-torso"></span>
-        <span class="figure-arm arm-left"></span>
-        <span class="figure-arm arm-right"></span>
-        <span class="figure-leg leg-left"></span>
-        <span class="figure-leg leg-right"></span>
+      <div class="ronaldo-gif-wrap" aria-hidden="true">
+        <img
+          class="ronaldo-gif"
+          src="./public/ronaldo-siuu.gif"
+          alt=""
+          loading="lazy"
+        />
       </div>
       <button class="siuu-fab" id="siuuButton" type="button">SIUU</button>
     </div>
+
+    <audio id="siuuAudio" preload="auto" src="./public/ronaldo-siuu.mp3"></audio>
 
     <div class="celebration-layer" id="celebrationLayer" aria-hidden="true">
       <div class="celebration-message" id="celebrationMessage"></div>
