@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ronaldo Mode: a Cristiano Ronaldo page with live news, next match information, stats, and a daily trivia quiz."
+    />
+    <title>Ronaldo Mode</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="article-header">
+        <a class="back-link" href="./index.html">Home</a>
+        <div class="article-title-block">
+          <div class="flag-badge" aria-label="Portugal flag">
+            <span class="flag-portugal" aria-hidden="true"></span>
+            <span>Portugal</span>
+          </div>
+          <p class="eyebrow">Ronaldo Desk</p>
+          <h1>Ronaldo Mode</h1>
+          <p class="article-subtitle">
+            A lighter editorial page for confidence, football news, and a daily
+            Ronaldo reset.
+          </p>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero panel">
+          <div class="hero-copy">
+            <p class="eyebrow">Lead Story</p>
+            <h2>Confidence, discipline, and a little SIUU energy.</h2>
+            <p class="hero-subtitle">
+              This page is designed like a premium sports brief: live Ronaldo
+              headlines, clear match information, and quick sections that are
+              easy to scan.
+            </p>
+            <p class="hero-intro">
+              For the days you need confidence, discipline, and a little bit of
+              SIUU energy.
+            </p>
+
+            <div class="hero-actions">
+              <a class="primary-link" href="#news">Read news</a>
+              <button class="siuu-button" id="siuuButton" type="button">SIUU</button>
+            </div>
+
+            <div class="hero-meta" id="refreshMeta"></div>
+          </div>
+
+          <div class="hero-visual panel-subsection">
+            <div class="hero-stat-card">
+              <p class="hero-stat-label">Page Status</p>
+              <p class="hero-stat-value">Live News On</p>
+              <p class="hero-stat-detail">Headlines refresh on load from a news feed</p>
+            </div>
+
+            <div class="next-match-card" id="nextMatchCard"></div>
+
+            <div class="hero-pill-grid" id="moodGrid"></div>
+          </div>
+        </section>
+
+        <section class="section-block" id="news">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Live Desk</p>
+              <h3>Latest Ronaldo News</h3>
+            </div>
+            <p class="section-note">
+              Live headlines are pulled from a Google News RSS feed, with mock
+              fallback cards if the request fails.
+            </p>
+          </div>
+          <div class="news-status" id="newsStatus">Loading latest headlines...</div>
+          <div class="news-grid" id="newsGrid"></div>
+        </section>
+
+        <section class="section-block" id="matches">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Match Ledger</p>
+              <h3>Recent Match Snapshot</h3>
+            </div>
+            <p class="section-note">
+              Compact report cards for recent performances.
+            </p>
+          </div>
+          <div class="matches-grid" id="matchesGrid"></div>
+        </section>
+
+        <section class="section-block quiz-section" id="quiz">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Daily Quiz</p>
+              <h3>Ronaldo Trivia of the Day</h3>
+            </div>
+            <p class="section-note">
+              One multiple-choice question rotates each day.
+            </p>
+          </div>
+
+          <article class="quiz-card">
+            <p class="panel-label" id="quizLabel"></p>
+            <h4 id="quizQuestion"></h4>
+            <div class="quiz-options" id="quizOptions"></div>
+            <p class="quiz-feedback" id="quizFeedback"></p>
+          </article>
+        </section>
+
+        <section class="section-block mindset-block" id="mindset">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Editorial Note</p>
+              <h3>Quote + Daily Mood</h3>
+            </div>
+            <p class="section-note">
+              A compact confidence boost to round out the page.
+            </p>
+          </div>
+
+          <div class="mindset-layout">
+            <article class="panel quote-panel">
+              <p class="panel-label">Featured Quote</p>
+              <blockquote id="quoteText"></blockquote>
+              <p class="quote-source">Cristiano Ronaldo mode, all day.</p>
+            </article>
+
+            <article class="panel mood-panel">
+              <p class="panel-label">Today’s Energy</p>
+              <div class="mood-stack" id="moodStack"></div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="celebration-layer" id="celebrationLayer" aria-hidden="true">
+      <div class="celebration-message" id="celebrationMessage"></div>
+    </div>
+
+    <script type="module" src="./src/ronaldo-page.js"></script>
+  </body>
+</html>

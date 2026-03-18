@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Home base for a personal multi-tab web app, featuring a Ronaldo Mode shortcut and placeholder destinations."
+    />
+    <title>Mode Hub</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="home-body">
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="site-wordmark" href="./index.html">Mode Hub</a>
+        <nav class="site-tabs" aria-label="Primary">
+          <a class="site-tab active" href="./index.html">Home</a>
+          <span class="site-tab placeholder">Mindset</span>
+          <span class="site-tab placeholder">Football</span>
+          <span class="site-tab placeholder">Routines</span>
+          <span class="site-tab placeholder">Archive</span>
+        </nav>
+      </header>
+
+      <main class="home-main">
+        <section class="home-hero">
+          <div>
+            <p class="section-kicker">Base Page</p>
+            <h1 class="home-title">A calm front door for the rest of the app.</h1>
+            <p class="home-copy">
+              This home page acts as the launcher for the wider experience.
+              Ronaldo Mode is live now, while the other destinations are left in
+              place as clean placeholders for future sections.
+            </p>
+          </div>
+          <div class="home-summary-card">
+            <p class="summary-label">Live Shortcut</p>
+            <h2>Ronaldo Mode</h2>
+            <p>
+              Includes live news, next match date, daily quiz, and a dedicated
+              editorial page.
+            </p>
+            <a class="button-primary" href="./ronaldo.html">Open Ronaldo Mode</a>
+          </div>
+        </section>
+
+        <section class="shortcut-section">
+          <div class="section-heading-simple">
+            <p class="section-kicker">Shortcuts</p>
+            <h2>Choose a section</h2>
+          </div>
+
+          <div class="shortcut-grid">
+            <a class="shortcut-card featured" href="./ronaldo.html">
+              <div class="shortcut-topline">
+                <span class="badge-live">Live</span>
+                <span class="shortcut-label">Cristiano Ronaldo</span>
+              </div>
+              <h3>Ronaldo Mode</h3>
+              <p>
+                News, next fixture, quick stats, a daily Ronaldo trivia quiz,
+                and a cleaner match digest.
+              </p>
+            </a>
+
+            <article class="shortcut-card muted">
+              <div class="shortcut-topline">
+                <span class="badge-placeholder">Soon</span>
+                <span class="shortcut-label">Focus</span>
+              </div>
+              <h3>Discipline Board</h3>
+              <p>Placeholder for routines, goals, and personal consistency tracking.</p>
+            </article>
+
+            <article class="shortcut-card muted">
+              <div class="shortcut-topline">
+                <span class="badge-placeholder">Soon</span>
+                <span class="shortcut-label">Football</span>
+              </div>
+              <h3>Matchroom</h3>
+              <p>Placeholder for broader football follow lists, fixtures, and alerts.</p>
+            </article>
+
+            <article class="shortcut-card muted">
+              <div class="shortcut-topline">
+                <span class="badge-placeholder">Soon</span>
+                <span class="shortcut-label">Archive</span>
+              </div>
+              <h3>Saved Notes</h3>
+              <p>Placeholder for quotes, memories, and saved pieces across the app.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
