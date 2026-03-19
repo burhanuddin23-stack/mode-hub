@@ -103,8 +103,17 @@ function normalizeEspnDate(label, mode) {
     date = new Date(`${label}, ${currentYear - 1}`);
   }
 
-  if (mode === "fixture" && date.getTime() < now.getTime() - 120 * 86400000) {
-    date = new Date(`${label}, ${currentYear + 1}`);
+  if (mode === "fixture" && date.getTime() < now.getTime() - 2 * 86400000) {
+    const nextYearDate = new Date(`${label}, ${currentYear + 1}`);
+
+    if (
+      !Number.isNaN(nextYearDate.getTime()) &&
+      nextYearDate.getTime() - now.getTime() < 120 * 86400000
+    ) {
+      date = nextYearDate;
+    } else {
+      return "";
+    }
   }
 
   return date.toISOString();
@@ -199,19 +208,27 @@ function parseEspnFixtures(html) {
     const isHomeTeam = teamA === TEAM_NAME;
     const opponent = isHomeTeam ? teamB : teamA;
     const baseTimestamp = normalizeEspnDate(line, "fixture");
+    if (!baseTimestamp) continue;
+
     const dateOnly = baseTimestamp ? baseTimestamp.slice(0, 10) : "";
     const timePart = /^\d/.test(timeValue) ? parseEspnTime(timeValue) : "";
     const timestamp = dateOnly
       ? normalizeTimestamp(dateOnly, timePart)
       : "";
 
+    const finalTimestamp = timestamp || baseTimestamp;
+    const fixtureDate = new Date(finalTimestamp);
+    if (Number.isNaN(fixtureDate.getTime()) || fixtureDate.getTime() < Date.now() - 2 * 3600000) {
+      continue;
+    }
+
     return {
       team: TEAM_NAME,
       opponent,
       competition,
-      dateLabel: formatDateLabel(timestamp || baseTimestamp),
+      dateLabel: formatDateLabel(finalTimestamp),
       timeLabel: timeValue === "TBD" ? "Time TBD" : timeValue,
-      timestamp: timestamp || baseTimestamp,
+      timestamp: finalTimestamp,
       note: "Live fixture from ESPN.",
     };
   }
