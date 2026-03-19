@@ -17,6 +17,11 @@ const entryList = document.querySelector("#entryList");
 const disciplineCurrentStreak = document.querySelector("#disciplineCurrentStreak");
 const disciplineWeeklyScore = document.querySelector("#disciplineWeeklyScore");
 const disciplineWeeklyDetail = document.querySelector("#disciplineWeeklyDetail");
+const avocadoPet = document.querySelector("#avocadoPet");
+const avocadoBubble = document.querySelector("#avocadoBubble");
+const avocadoMoodLabel = document.querySelector("#avocadoMoodLabel");
+const avocadoMessage = document.querySelector("#avocadoMessage");
+const avocadoFace = document.querySelector("#avocadoFace");
 
 const goalWeeklyGym = document.querySelector("#goalWeeklyGym");
 const goalWeeklyRunKm = document.querySelector("#goalWeeklyRunKm");
@@ -228,6 +233,67 @@ function getPersonalBests(entries) {
   };
 }
 
+function getAvocadoState({ goals, weeklyStats, currentStreak, entries }) {
+  const todayEntry = entries.find((entry) => entry.date === getTodayLabel());
+  const goalHits = Number(weeklyStats.gymGoalMet) + Number(weeklyStats.runGoalMet);
+
+  if (goalHits === 2) {
+    return {
+      mood: "Hyped",
+      face: "hyped",
+      message: "Week handled. Keep the standard high.",
+    };
+  }
+
+  if (todayEntry && isActiveDay(todayEntry)) {
+    return {
+      mood: "Locked in",
+      face: "happy",
+      message: "Today is already logged. That helps tomorrow.",
+    };
+  }
+
+  if (currentStreak >= goals.streak) {
+    return {
+      mood: "On fire",
+      face: "proud",
+      message: "Streak goal matched. Keep feeding it.",
+    };
+  }
+
+  if (!entries.length) {
+    return {
+      mood: "Waiting",
+      face: "neutral",
+      message: "Start with one entry. The board gets better fast.",
+    };
+  }
+
+  if (weeklyStats.gymCount === 0 && weeklyStats.runDistanceKm === 0) {
+    return {
+      mood: "Concerned",
+      face: "concerned",
+      message: "Quiet week so far. One session changes the tone.",
+    };
+  }
+
+  return {
+    mood: "Steady",
+    face: "neutral",
+    message: "You are mid-week. Keep the momentum alive.",
+  };
+}
+
+function renderAvocado(data) {
+  if (!avocadoPet) return;
+
+  const state = getAvocadoState(data);
+  avocadoMoodLabel.textContent = state.mood;
+  avocadoMessage.textContent = state.message;
+  avocadoFace.dataset.face = state.face;
+  avocadoPet.dataset.mood = state.face;
+}
+
 function renderGoalInputs(goals) {
   goalWeeklyGym.value = goals.weeklyGym;
   goalWeeklyRunKm.value = goals.weeklyRunKm;
@@ -386,6 +452,7 @@ function renderDashboard(state) {
   disciplineCurrentStreak.textContent = `${currentStreak} day${currentStreak === 1 ? "" : "s"}`;
   disciplineWeeklyScore.textContent = `${weeklyStats.gymCount} / ${state.goals.weeklyGym}`;
   disciplineWeeklyDetail.textContent = `Gym ${weeklyStats.gymCount} · Run ${formatOneDecimal(weeklyStats.runDistanceKm)} km`;
+  renderAvocado({ goals: state.goals, weeklyStats, currentStreak, entries: state.entries });
 }
 
 function fillEntryForm(entry = null) {
@@ -428,6 +495,12 @@ function buildEntryPayload() {
 }
 
 let state = loadState();
+
+if (avocadoPet) {
+  avocadoPet.addEventListener("click", () => {
+    avocadoBubble.classList.toggle("active");
+  });
+}
 
 goalForm.addEventListener("submit", (event) => {
   event.preventDefault();

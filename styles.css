@@ -1060,6 +1060,195 @@ body.discipline-body .hero-copy h2 {
   background: #eef2ea;
 }
 
+.avocado-pet {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 10;
+  display: grid;
+  gap: 0.7rem;
+  justify-items: end;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.avocado-bubble {
+  width: min(240px, calc(100vw - 2rem));
+  padding: 0.9rem 1rem;
+  border-radius: 22px;
+  border: 1px solid rgba(95, 111, 82, 0.14);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.avocado-bubble.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.avocado-message {
+  margin: 0.45rem 0 0;
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 0.96rem;
+}
+
+.avocado-stage {
+  position: relative;
+  width: 118px;
+  height: 118px;
+}
+
+.avocado-shadow {
+  position: absolute;
+  left: 19px;
+  bottom: 12px;
+  width: 78px;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(20, 23, 19, 0.12);
+}
+
+.avocado-body {
+  position: absolute;
+  left: 16px;
+  top: 8px;
+  width: 86px;
+  height: 92px;
+  clip-path: polygon(
+    46% 0%,
+    60% 4%,
+    70% 12%,
+    78% 26%,
+    82% 42%,
+    82% 60%,
+    76% 76%,
+    64% 90%,
+    50% 100%,
+    36% 90%,
+    24% 76%,
+    18% 60%,
+    18% 42%,
+    22% 26%,
+    30% 12%,
+    40% 4%
+  );
+  background: #9cbd6b;
+  box-shadow:
+    inset 0 0 0 8px #56713e,
+    inset 0 0 0 16px #a9cf77;
+  image-rendering: pixelated;
+  animation: avocado-bob 2.8s ease-in-out infinite;
+}
+
+.avocado-seed {
+  position: absolute;
+  left: 28px;
+  top: 38px;
+  width: 30px;
+  height: 34px;
+  border-radius: 42% 42% 48% 48%;
+  background: #9a5a28;
+  box-shadow: inset 0 0 0 6px #b87439;
+}
+
+.avocado-face {
+  position: absolute;
+  inset: 0;
+}
+
+.avocado-face::before,
+.avocado-face::after {
+  content: "";
+  position: absolute;
+  top: 28px;
+  width: 6px;
+  height: 6px;
+  background: #1f2918;
+}
+
+.avocado-face::before {
+  left: 26px;
+}
+
+.avocado-face::after {
+  right: 26px;
+}
+
+.avocado-face[data-face="neutral"]::before,
+.avocado-face[data-face="neutral"]::after,
+.avocado-face[data-face="happy"]::before,
+.avocado-face[data-face="happy"]::after,
+.avocado-face[data-face="proud"]::before,
+.avocado-face[data-face="proud"]::after,
+.avocado-face[data-face="concerned"]::before,
+.avocado-face[data-face="concerned"]::after,
+.avocado-face[data-face="hyped"]::before,
+.avocado-face[data-face="hyped"]::after {
+  box-shadow: none;
+}
+
+.avocado-face::selection {
+  background: transparent;
+}
+
+.avocado-face[data-face="neutral"] {
+  background:
+    linear-gradient(#1f2918, #1f2918) 38px 47px / 12px 3px no-repeat;
+}
+
+.avocado-face[data-face="happy"] {
+  background:
+    radial-gradient(circle at center, transparent 8px, #1f2918 8px, #1f2918 10px, transparent 10px) 32px 35px / 26px 26px no-repeat;
+}
+
+.avocado-face[data-face="proud"] {
+  background:
+    radial-gradient(circle at center, transparent 8px, #1f2918 8px, #1f2918 10px, transparent 10px) 32px 33px / 26px 26px no-repeat;
+}
+
+.avocado-face[data-face="concerned"] {
+  background:
+    linear-gradient(#1f2918, #1f2918) 36px 46px / 16px 3px no-repeat;
+}
+
+.avocado-face[data-face="hyped"] {
+  background:
+    linear-gradient(#1f2918, #1f2918) 36px 44px / 18px 4px no-repeat;
+}
+
+.avocado-leg {
+  position: absolute;
+  bottom: -8px;
+  width: 10px;
+  height: 16px;
+  background: #56713e;
+}
+
+.avocado-leg.left {
+  left: 24px;
+}
+
+.avocado-leg.right {
+  right: 24px;
+}
+
+.avocado-pet[data-mood="happy"] .avocado-body,
+.avocado-pet[data-mood="proud"] .avocado-body,
+.avocado-pet[data-mood="hyped"] .avocado-body {
+  animation-duration: 2.2s;
+}
+
+.avocado-pet[data-mood="concerned"] .avocado-body {
+  filter: saturate(0.92);
+}
+
 body.matcha-body {
   background: #f0f4ea;
 }
@@ -1515,6 +1704,17 @@ blockquote {
   }
   to {
     opacity: 0;
+  }
+}
+
+@keyframes avocado-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
   }
 }
 
