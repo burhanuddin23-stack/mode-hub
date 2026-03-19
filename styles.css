@@ -1062,12 +1062,12 @@ body.discipline-body .hero-copy h2 {
 
 .avocado-pet {
   position: fixed;
-  right: 1rem;
+  left: 1rem;
   bottom: 1rem;
   z-index: 10;
   display: grid;
   gap: 0.7rem;
-  justify-items: end;
+  justify-items: start;
   padding: 0;
   border: 0;
   background: transparent;
@@ -1081,8 +1081,8 @@ body.discipline-body .hero-copy h2 {
   border: 1px solid rgba(95, 111, 82, 0.14);
   background: rgba(255, 255, 255, 0.92);
   box-shadow: var(--shadow-soft);
-  opacity: 0;
-  transform: translateY(8px);
+  opacity: 1;
+  transform: translateY(0);
   pointer-events: none;
   transition: opacity 160ms ease, transform 160ms ease;
 }
@@ -1101,152 +1101,91 @@ body.discipline-body .hero-copy h2 {
 
 .avocado-stage {
   position: relative;
-  width: 118px;
-  height: 118px;
+  width: 124px;
+  height: 112px;
 }
 
-.avocado-shadow {
-  position: absolute;
-  left: 19px;
-  bottom: 12px;
-  width: 78px;
-  height: 12px;
-  border-radius: 999px;
-  background: rgba(20, 23, 19, 0.12);
-}
-
-.avocado-body {
-  position: absolute;
-  left: 16px;
-  top: 8px;
-  width: 86px;
-  height: 92px;
-  clip-path: polygon(
-    46% 0%,
-    60% 4%,
-    70% 12%,
-    78% 26%,
-    82% 42%,
-    82% 60%,
-    76% 76%,
-    64% 90%,
-    50% 100%,
-    36% 90%,
-    24% 76%,
-    18% 60%,
-    18% 42%,
-    22% 26%,
-    30% 12%,
-    40% 4%
-  );
-  background: #9cbd6b;
-  box-shadow:
-    inset 0 0 0 8px #56713e,
-    inset 0 0 0 16px #a9cf77;
-  image-rendering: pixelated;
+.avocado-sprite {
+  width: 124px;
+  height: 112px;
+  overflow: visible;
   animation: avocado-bob 2.8s ease-in-out infinite;
 }
 
-.avocado-seed {
-  position: absolute;
-  left: 28px;
-  top: 38px;
-  width: 30px;
-  height: 34px;
-  border-radius: 42% 42% 48% 48%;
-  background: #9a5a28;
-  box-shadow: inset 0 0 0 6px #b87439;
+.avocado-shadow {
+  fill: rgba(20, 23, 19, 0.14);
 }
 
-.avocado-face {
-  position: absolute;
-  inset: 0;
+.avocado-outline {
+  fill: #4f6a37;
 }
 
-.avocado-face::before,
-.avocado-face::after {
-  content: "";
-  position: absolute;
-  top: 28px;
-  width: 6px;
-  height: 6px;
-  background: #1f2918;
+.avocado-flesh {
+  fill: #a8cd72;
 }
 
-.avocado-face::before {
-  left: 26px;
+.avocado-seed-outer {
+  fill: #8a4c21;
 }
 
-.avocado-face::after {
-  right: 26px;
-}
-
-.avocado-face[data-face="neutral"]::before,
-.avocado-face[data-face="neutral"]::after,
-.avocado-face[data-face="happy"]::before,
-.avocado-face[data-face="happy"]::after,
-.avocado-face[data-face="proud"]::before,
-.avocado-face[data-face="proud"]::after,
-.avocado-face[data-face="concerned"]::before,
-.avocado-face[data-face="concerned"]::after,
-.avocado-face[data-face="hyped"]::before,
-.avocado-face[data-face="hyped"]::after {
-  box-shadow: none;
-}
-
-.avocado-face::selection {
-  background: transparent;
-}
-
-.avocado-face[data-face="neutral"] {
-  background:
-    linear-gradient(#1f2918, #1f2918) 38px 47px / 12px 3px no-repeat;
-}
-
-.avocado-face[data-face="happy"] {
-  background:
-    radial-gradient(circle at center, transparent 8px, #1f2918 8px, #1f2918 10px, transparent 10px) 32px 35px / 26px 26px no-repeat;
-}
-
-.avocado-face[data-face="proud"] {
-  background:
-    radial-gradient(circle at center, transparent 8px, #1f2918 8px, #1f2918 10px, transparent 10px) 32px 33px / 26px 26px no-repeat;
-}
-
-.avocado-face[data-face="concerned"] {
-  background:
-    linear-gradient(#1f2918, #1f2918) 36px 46px / 16px 3px no-repeat;
-}
-
-.avocado-face[data-face="hyped"] {
-  background:
-    linear-gradient(#1f2918, #1f2918) 36px 44px / 18px 4px no-repeat;
+.avocado-seed-inner {
+  fill: #b56e34;
 }
 
 .avocado-leg {
-  position: absolute;
-  bottom: -8px;
-  width: 10px;
-  height: 16px;
-  background: #56713e;
+  fill: #4f6a37;
 }
 
-.avocado-leg.left {
-  left: 24px;
+.avocado-face-svg {
+  fill: #1f2918;
 }
 
-.avocado-leg.right {
-  right: 24px;
+.avocado-face-svg .mouth-happy,
+.avocado-face-svg .mouth-proud,
+.avocado-face-svg .mouth-concerned,
+.avocado-face-svg .mouth-hyped {
+  display: none;
 }
 
-.avocado-pet[data-mood="happy"] .avocado-body,
-.avocado-pet[data-mood="proud"] .avocado-body,
-.avocado-pet[data-mood="hyped"] .avocado-body {
-  animation-duration: 2.2s;
+.avocado-face-svg[data-face="neutral"] .mouth-neutral {
+  display: block;
 }
 
-.avocado-pet[data-mood="concerned"] .avocado-body {
-  filter: saturate(0.92);
+.avocado-face-svg[data-face="happy"] .mouth-neutral,
+.avocado-face-svg[data-face="proud"] .mouth-neutral,
+.avocado-face-svg[data-face="concerned"] .mouth-neutral,
+.avocado-face-svg[data-face="hyped"] .mouth-neutral {
+  display: none;
+}
+
+.avocado-face-svg[data-face="happy"] .mouth-happy {
+  display: block;
+}
+
+.avocado-face-svg[data-face="proud"] .mouth-proud {
+  display: block;
+}
+
+.avocado-face-svg[data-face="concerned"] .mouth-concerned {
+  display: block;
+}
+
+.avocado-face-svg[data-face="hyped"] .mouth-hyped {
+  display: block;
+}
+
+.avocado-pet[data-mood="hyped"] .avocado-sprite,
+.avocado-pet[data-mood="happy"] .avocado-sprite,
+.avocado-pet[data-mood="proud"] .avocado-sprite {
+  animation-duration: 2.1s;
+}
+
+.avocado-pet[data-mood="concerned"] .avocado-flesh {
+  fill: #9fbe70;
+}
+
+.avocado-pet[data-mood="hyped"] .avocado-seed-inner {
+  fill: #c97b3b;
 }
 
 body.matcha-body {

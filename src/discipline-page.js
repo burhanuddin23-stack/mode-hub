@@ -22,6 +22,8 @@ const avocadoBubble = document.querySelector("#avocadoBubble");
 const avocadoMoodLabel = document.querySelector("#avocadoMoodLabel");
 const avocadoMessage = document.querySelector("#avocadoMessage");
 const avocadoFace = document.querySelector("#avocadoFace");
+let avocadoLines = ["Ready when you are."];
+let avocadoLineIndex = 0;
 
 const goalWeeklyGym = document.querySelector("#goalWeeklyGym");
 const goalWeeklyRunKm = document.querySelector("#goalWeeklyRunKm");
@@ -241,7 +243,10 @@ function getAvocadoState({ goals, weeklyStats, currentStreak, entries }) {
     return {
       mood: "Hyped",
       face: "hyped",
-      message: "Week handled. Keep the standard high.",
+      lines: [
+        "Week handled. Keep the standard high.",
+        "That board looks serious now.",
+      ],
     };
   }
 
@@ -249,7 +254,10 @@ function getAvocadoState({ goals, weeklyStats, currentStreak, entries }) {
     return {
       mood: "Locked in",
       face: "happy",
-      message: "Today is already logged. That helps tomorrow.",
+      lines: [
+        "Today is already logged. That helps tomorrow.",
+        "Good. One less thing hanging over you.",
+      ],
     };
   }
 
@@ -257,7 +265,10 @@ function getAvocadoState({ goals, weeklyStats, currentStreak, entries }) {
     return {
       mood: "On fire",
       face: "proud",
-      message: "Streak goal matched. Keep feeding it.",
+      lines: [
+        "Streak goal matched. Keep feeding it.",
+        "Consistency looks good on you.",
+      ],
     };
   }
 
@@ -265,7 +276,10 @@ function getAvocadoState({ goals, weeklyStats, currentStreak, entries }) {
     return {
       mood: "Waiting",
       face: "neutral",
-      message: "Start with one entry. The board gets better fast.",
+      lines: [
+        "Start with one entry. The board gets better fast.",
+        "One line today is enough to begin.",
+      ],
     };
   }
 
@@ -273,14 +287,20 @@ function getAvocadoState({ goals, weeklyStats, currentStreak, entries }) {
     return {
       mood: "Concerned",
       face: "concerned",
-      message: "Quiet week so far. One session changes the tone.",
+      lines: [
+        "Quiet week so far. One session changes the tone.",
+        "You do not need a perfect week. Just movement.",
+      ],
     };
   }
 
   return {
     mood: "Steady",
     face: "neutral",
-    message: "You are mid-week. Keep the momentum alive.",
+    lines: [
+      "You are mid-week. Keep the momentum alive.",
+      "A decent week can still become a strong one.",
+    ],
   };
 }
 
@@ -288,10 +308,13 @@ function renderAvocado(data) {
   if (!avocadoPet) return;
 
   const state = getAvocadoState(data);
+  avocadoLines = state.lines;
+  avocadoLineIndex = 0;
   avocadoMoodLabel.textContent = state.mood;
-  avocadoMessage.textContent = state.message;
+  avocadoMessage.textContent = avocadoLines[avocadoLineIndex];
   avocadoFace.dataset.face = state.face;
   avocadoPet.dataset.mood = state.face;
+  avocadoBubble.classList.add("active");
 }
 
 function renderGoalInputs(goals) {
@@ -498,7 +521,8 @@ let state = loadState();
 
 if (avocadoPet) {
   avocadoPet.addEventListener("click", () => {
-    avocadoBubble.classList.toggle("active");
+    avocadoLineIndex = (avocadoLineIndex + 1) % avocadoLines.length;
+    avocadoMessage.textContent = avocadoLines[avocadoLineIndex];
   });
 }
 
