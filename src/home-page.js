@@ -10,14 +10,10 @@ const homeMatchaSource = document.querySelector("#homeMatchaSource");
 const homeSavedCount = document.querySelector("#homeSavedCount");
 const homeArchiveCopy = document.querySelector("#homeArchiveCopy");
 const breakOrb = document.querySelector("#breakOrb");
+const breakOverlay = document.querySelector("#breakOverlay");
+const breakClose = document.querySelector("#breakClose");
 
 let countdownTimerId = null;
-
-const GOOGLE_GAME_LINKS = [
-  "https://doodles.google/doodle/30th-anniversary-of-pac-man/",
-  "https://www.google.com/search?q=google+snake",
-  "https://www.google.com/search?q=tic+tac+toe",
-];
 
 function formatMatchLine(match) {
   return `${match.dateLabel} · ${match.team || "Ronaldo side"} vs ${match.opponent}`;
@@ -134,14 +130,27 @@ function renderSavedPreview() {
   }
 }
 
-function pickBreakLink() {
-  const index = Math.floor(Math.random() * GOOGLE_GAME_LINKS.length);
-  return GOOGLE_GAME_LINKS[index];
-}
-
 if (breakOrb) {
   breakOrb.addEventListener("click", (event) => {
-    breakOrb.href = pickBreakLink();
+    event.preventDefault();
+    breakOverlay?.classList.add("active");
+    document.body.classList.add("break-open");
+  });
+}
+
+if (breakClose) {
+  breakClose.addEventListener("click", () => {
+    breakOverlay?.classList.remove("active");
+    document.body.classList.remove("break-open");
+  });
+}
+
+if (breakOverlay) {
+  breakOverlay.addEventListener("click", (event) => {
+    if (event.target === breakOverlay) {
+      breakOverlay.classList.remove("active");
+      document.body.classList.remove("break-open");
+    }
   });
 }
 

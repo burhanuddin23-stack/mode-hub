@@ -125,11 +125,9 @@
 
     <a
       class="break-orb"
-      href="https://www.google.com/"
+      href="#"
       id="breakOrb"
       aria-label="Click in times of extreme workload"
-      target="_blank"
-      rel="noreferrer"
     >
       <svg class="break-orb-ring" viewBox="0 0 120 120" aria-hidden="true">
         <defs>
@@ -146,6 +144,37 @@
       </svg>
       <span class="break-orb-center">Break</span>
     </a>
+
+    <div class="break-overlay" id="breakOverlay" aria-hidden="true">
+      <div class="break-panel">
+        <div class="break-panel-header">
+          <div>
+            <p class="panel-label">Recovery Protocol</p>
+            <h2>Pick your distraction.</h2>
+          </div>
+          <button class="break-close" id="breakClose" type="button" aria-label="Close break launcher">
+            Close
+          </button>
+        </div>
+        <div class="break-grid">
+          <a class="break-choice" href="https://doodles.google/doodle/30th-anniversary-of-pac-man/" target="_blank" rel="noreferrer">
+            <span class="tag">Google Doodle</span>
+            <h3>Pac-Man</h3>
+            <p>Classic and immediate.</p>
+          </a>
+          <a class="break-choice" href="https://www.google.com/search?q=google+snake" target="_blank" rel="noreferrer">
+            <span class="tag">Google Search</span>
+            <h3>Snake</h3>
+            <p>Low-stakes, quick reset.</p>
+          </a>
+          <a class="break-choice" href="https://www.google.com/search?q=tic+tac+toe" target="_blank" rel="noreferrer">
+            <span class="tag">Google Search</span>
+            <h3>Tic-Tac-Toe</h3>
+            <p>Very short break energy.</p>
+          </a>
+        </div>
+      </div>
+    </div>
 
     <script type="module" src="./src/home-page.js"></script>
   </body>
