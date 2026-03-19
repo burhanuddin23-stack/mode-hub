@@ -229,6 +229,11 @@ blockquote,
   line-height: 1.65;
 }
 
+.home-copy {
+  margin: 0.65rem 0 0;
+  font-size: clamp(1.15rem, 2.8vw, 1.45rem);
+}
+
 .home-summary-card {
   padding: 1.1rem;
   background: rgba(255, 255, 255, 0.88);
