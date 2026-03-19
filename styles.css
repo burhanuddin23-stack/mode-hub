@@ -1062,8 +1062,8 @@ body.discipline-body .hero-copy h2 {
 
 .avocado-pet {
   position: fixed;
-  left: 1rem;
-  bottom: 1rem;
+  left: -0.35rem;
+  bottom: -1.4rem;
   z-index: 10;
   display: grid;
   gap: 0.7rem;
@@ -1077,6 +1077,7 @@ body.discipline-body .hero-copy h2 {
 .avocado-bubble {
   width: min(320px, calc(100vw - 2rem));
   padding: 1rem 1.05rem;
+  margin-left: 1.4rem;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.72);
   background: rgba(255, 255, 255, 0.9);
