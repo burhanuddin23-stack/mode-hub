@@ -1081,8 +1081,8 @@ body.discipline-body .hero-copy h2 {
   border: 1px solid rgba(95, 111, 82, 0.14);
   background: rgba(255, 255, 255, 0.92);
   box-shadow: var(--shadow-soft);
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 0;
+  transform: translateY(8px);
   pointer-events: none;
   transition: opacity 160ms ease, transform 160ms ease;
 }
@@ -1101,91 +1101,42 @@ body.discipline-body .hero-copy h2 {
 
 .avocado-stage {
   position: relative;
-  width: 124px;
-  height: 112px;
+  width: 132px;
+  height: 132px;
 }
 
-.avocado-sprite {
-  width: 124px;
-  height: 112px;
-  overflow: visible;
+.avocado-figure {
+  position: absolute;
+  inset: 0;
+  width: 132px;
+  height: 132px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  user-select: none;
+  -webkit-user-drag: none;
   animation: avocado-bob 2.8s ease-in-out infinite;
 }
 
-.avocado-shadow {
-  fill: rgba(20, 23, 19, 0.14);
+.avocado-up {
+  opacity: 0;
 }
 
-.avocado-outline {
-  fill: #4f6a37;
+.avocado-pet.active .avocado-down {
+  opacity: 0;
 }
 
-.avocado-flesh {
-  fill: #a8cd72;
+.avocado-pet.active .avocado-up {
+  opacity: 1;
 }
 
-.avocado-seed-outer {
-  fill: #8a4c21;
-}
-
-.avocado-seed-inner {
-  fill: #b56e34;
-}
-
-.avocado-leg {
-  fill: #4f6a37;
-}
-
-.avocado-face-svg {
-  fill: #1f2918;
-}
-
-.avocado-face-svg .mouth-happy,
-.avocado-face-svg .mouth-proud,
-.avocado-face-svg .mouth-concerned,
-.avocado-face-svg .mouth-hyped {
-  display: none;
-}
-
-.avocado-face-svg[data-face="neutral"] .mouth-neutral {
-  display: block;
-}
-
-.avocado-face-svg[data-face="happy"] .mouth-neutral,
-.avocado-face-svg[data-face="proud"] .mouth-neutral,
-.avocado-face-svg[data-face="concerned"] .mouth-neutral,
-.avocado-face-svg[data-face="hyped"] .mouth-neutral {
-  display: none;
-}
-
-.avocado-face-svg[data-face="happy"] .mouth-happy {
-  display: block;
-}
-
-.avocado-face-svg[data-face="proud"] .mouth-proud {
-  display: block;
-}
-
-.avocado-face-svg[data-face="concerned"] .mouth-concerned {
-  display: block;
-}
-
-.avocado-face-svg[data-face="hyped"] .mouth-hyped {
-  display: block;
-}
-
-.avocado-pet[data-mood="hyped"] .avocado-sprite,
-.avocado-pet[data-mood="happy"] .avocado-sprite,
-.avocado-pet[data-mood="proud"] .avocado-sprite {
+.avocado-pet[data-mood="hyped"] .avocado-figure,
+.avocado-pet[data-mood="happy"] .avocado-figure,
+.avocado-pet[data-mood="proud"] .avocado-figure {
   animation-duration: 2.1s;
 }
 
-.avocado-pet[data-mood="concerned"] .avocado-flesh {
-  fill: #9fbe70;
-}
-
-.avocado-pet[data-mood="hyped"] .avocado-seed-inner {
-  fill: #c97b3b;
+.avocado-pet[data-mood="concerned"] .avocado-figure {
+  filter: saturate(0.92);
 }
 
 body.matcha-body {
