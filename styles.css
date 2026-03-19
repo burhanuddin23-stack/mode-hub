@@ -1501,6 +1501,11 @@ body.break-open {
   text-decoration: none;
 }
 
+.break-choice-player {
+  display: grid;
+  gap: 0.75rem;
+}
+
 .break-choice h3 {
   margin: 0.6rem 0 0;
   font-size: 1.4rem;
@@ -1510,6 +1515,13 @@ body.break-open {
 .break-choice p {
   margin: 0.45rem 0 0;
   color: var(--muted);
+}
+
+.spotify-break-player {
+  width: 100%;
+  min-height: 352px;
+  border: 0;
+  border-radius: 20px;
 }
 
 blockquote {
