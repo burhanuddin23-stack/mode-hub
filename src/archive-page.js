@@ -1,8 +1,14 @@
 import { getSavedItems, removeSavedItem } from "./saved-items.js";
+import { initAvocadoPet } from "./avocado-pet.js";
 
 const archiveGrid = document.querySelector("#archiveGrid");
 const archiveCountText = document.querySelector("#archiveCountText");
 const archiveFilters = document.querySelector("#archiveFilters");
+const avocado = initAvocadoPet({
+  label: "Archive avo",
+  face: "neutral",
+  intro: "You save good things. I respect that.",
+});
 
 const FILTERS = [
   { key: "all", label: "All" },

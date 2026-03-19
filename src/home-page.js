@@ -1,6 +1,7 @@
 import { matchesFeedUrl, nextMatch as fallbackNextMatch, recentMatches } from "./ronaldo-data.js";
 import { matchaFeedUrl, fallbackRecipes } from "./matcha-data.js";
 import { getSavedCount } from "./saved-items.js";
+import { initAvocadoPet } from "./avocado-pet.js";
 
 const homeNextMatch = document.querySelector("#homeNextMatch");
 const homeCountdown = document.querySelector("#homeCountdown");
@@ -14,6 +15,11 @@ const breakOverlay = document.querySelector("#breakOverlay");
 const breakClose = document.querySelector("#breakClose");
 
 let countdownTimerId = null;
+const avocado = initAvocadoPet({
+  label: "Home avo",
+  face: "happy",
+  intro: "Welcome back. Pick a mode, log a day, or just click me for avocado-grade wisdom.",
+});
 
 function formatMatchLine(match) {
   return `${match.dateLabel} · ${match.team || "Ronaldo side"} vs ${match.opponent}`;

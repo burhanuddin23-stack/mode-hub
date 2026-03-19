@@ -1,3 +1,5 @@
+import { initAvocadoPet } from "./avocado-pet.js";
+
 const STORAGE_KEY = "mode-hub-discipline-v1";
 
 const DEFAULT_GOALS = {
@@ -17,13 +19,11 @@ const entryList = document.querySelector("#entryList");
 const disciplineCurrentStreak = document.querySelector("#disciplineCurrentStreak");
 const disciplineWeeklyScore = document.querySelector("#disciplineWeeklyScore");
 const disciplineWeeklyDetail = document.querySelector("#disciplineWeeklyDetail");
-const avocadoPet = document.querySelector("#avocadoPet");
-const avocadoBubble = document.querySelector("#avocadoBubble");
-const avocadoMoodLabel = document.querySelector("#avocadoMoodLabel");
-const avocadoMessage = document.querySelector("#avocadoMessage");
-const avocadoFace = document.querySelector("#avocadoFace");
-let avocadoLines = ["Ready when you are."];
-let avocadoLineIndex = 0;
+const avocado = initAvocadoPet({
+  label: "Coachcado",
+  face: "neutral",
+  intro: "Log it properly and I will keep the vibe acceptable.",
+});
 
 const goalWeeklyGym = document.querySelector("#goalWeeklyGym");
 const goalWeeklyRunKm = document.querySelector("#goalWeeklyRunKm");
@@ -305,16 +305,12 @@ function getAvocadoState({ goals, weeklyStats, currentStreak, entries }) {
 }
 
 function renderAvocado(data) {
-  if (!avocadoPet) return;
-
   const state = getAvocadoState(data);
-  avocadoLines = state.lines;
-  avocadoLineIndex = 0;
-  avocadoMoodLabel.textContent = state.mood;
-  avocadoMessage.textContent = avocadoLines[avocadoLineIndex];
-  avocadoFace.dataset.face = state.face;
-  avocadoPet.dataset.mood = state.face;
-  avocadoBubble.classList.add("active");
+  avocado.setState({
+    label: state.mood,
+    face: state.face,
+    intro: state.lines[0],
+  });
 }
 
 function renderGoalInputs(goals) {
@@ -518,13 +514,6 @@ function buildEntryPayload() {
 }
 
 let state = loadState();
-
-if (avocadoPet) {
-  avocadoPet.addEventListener("click", () => {
-    avocadoLineIndex = (avocadoLineIndex + 1) % avocadoLines.length;
-    avocadoMessage.textContent = avocadoLines[avocadoLineIndex];
-  });
-}
 
 goalForm.addEventListener("submit", (event) => {
   event.preventDefault();

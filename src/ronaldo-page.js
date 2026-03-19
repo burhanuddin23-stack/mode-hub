@@ -8,6 +8,7 @@ import {
   recentMatches,
 } from "./ronaldo-data.js";
 import { buildSavedId, isSaved, toggleSavedItem } from "./saved-items.js";
+import { initAvocadoPet } from "./avocado-pet.js";
 
 const newsGrid = document.querySelector("#newsGrid");
 const newsStatus = document.querySelector("#newsStatus");
@@ -25,6 +26,11 @@ const siuuAudio = document.querySelector("#siuuAudio");
 const celebrationLayer = document.querySelector("#celebrationLayer");
 const celebrationGif = document.querySelector("#celebrationGif");
 const saveQuoteButton = document.querySelector("#saveQuoteButton");
+const avocado = initAvocadoPet({
+  label: "SIUUcado",
+  face: "proud",
+  intro: "News loaded, standards high, avocado present.",
+});
 
 const saveRegistry = new Map();
 let currentQuote = "";

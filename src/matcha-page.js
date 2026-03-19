@@ -1,11 +1,17 @@
 import { fallbackRecipes, matchaFacts, matchaFeedUrl } from "./matcha-data.js";
 import { buildSavedId, isSaved, toggleSavedItem } from "./saved-items.js";
+import { initAvocadoPet } from "./avocado-pet.js";
 
 const matchaGrid = document.querySelector("#matchaGrid");
 const matchaStatus = document.querySelector("#matchaStatus");
 const pourButton = document.querySelector("#pourButton");
 const matchaCup = document.querySelector("#matchaCup");
 const matchaFactsList = document.querySelector("#matchaFactsList");
+const avocado = initAvocadoPet({
+  label: "Matchacado",
+  face: "happy",
+  intro: "I support calm rituals and strong whisking technique.",
+});
 
 let allRecipes = fallbackRecipes;
 const saveRegistry = new Map();
