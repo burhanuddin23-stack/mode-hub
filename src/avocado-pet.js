@@ -79,9 +79,7 @@ export function initAvocadoPet(config = {}) {
     if (next.face) ui.pet.dataset.mood = next.face;
     if (next.intro) {
       intro = next.intro;
-      if (!ui.pet.classList.contains("active")) {
-        ui.message.textContent = intro;
-      }
+      ui.message.textContent = intro;
     }
   }
 
@@ -94,8 +92,12 @@ export function initAvocadoPet(config = {}) {
   ui.pet.addEventListener("click", () => {
     const isActive = ui.pet.classList.toggle("active");
     ui.bubble.classList.toggle("active", isActive);
-    ui.message.textContent = isActive ? nextJoke() : intro;
+    ui.message.textContent = isActive ? nextJoke() : "";
   });
+
+  ui.pet.classList.remove("active");
+  ui.bubble.classList.remove("active");
+  ui.message.textContent = "";
 
   const api = { setState };
   window.__modeHubAvocado = api;

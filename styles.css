@@ -1101,15 +1101,15 @@ body.discipline-body .hero-copy h2 {
 
 .avocado-stage {
   position: relative;
-  width: 132px;
-  height: 132px;
+  width: 156px;
+  height: 156px;
 }
 
 .avocado-figure {
   position: absolute;
   inset: 0;
-  width: 132px;
-  height: 132px;
+  width: 156px;
+  height: 156px;
   object-fit: contain;
   image-rendering: pixelated;
   user-select: none;
@@ -1117,15 +1117,19 @@ body.discipline-body .hero-copy h2 {
   animation: avocado-bob 2.8s ease-in-out infinite;
 }
 
-.avocado-up {
+.avocado-down {
   opacity: 0;
 }
 
 .avocado-pet.active .avocado-down {
-  opacity: 0;
+  opacity: 1;
 }
 
 .avocado-pet.active .avocado-up {
+  opacity: 0;
+}
+
+.avocado-up {
   opacity: 1;
 }
 
