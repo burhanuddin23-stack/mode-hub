@@ -1536,51 +1536,31 @@ blockquote {
   place-items: center;
   width: 148px;
   height: 148px;
-  padding: 1rem;
-  border: 6px solid rgba(255, 255, 255, 0.92);
+  padding: 0;
+  border: 0;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 24%, rgba(18, 21, 17, 0.98) 0 13px, transparent 14px),
-    radial-gradient(circle at 27% 37%, rgba(18, 21, 17, 0.98) 0 11px, transparent 12px),
-    radial-gradient(circle at 73% 37%, rgba(18, 21, 17, 0.98) 0 11px, transparent 12px),
-    radial-gradient(circle at 33% 70%, rgba(18, 21, 17, 0.98) 0 11px, transparent 12px),
-    radial-gradient(circle at 67% 70%, rgba(18, 21, 17, 0.98) 0 11px, transparent 12px),
-    #faf9f4;
+  background: transparent;
   color: #10120f;
   font: inherit;
   font-weight: 800;
   text-align: center;
   line-height: 1.2;
-  box-shadow:
-    0 0 0 10px rgba(201, 162, 39, 0.9),
-    0 18px 32px rgba(108, 85, 18, 0.24);
+  box-shadow: 0 18px 32px rgba(17, 20, 16, 0.18);
   cursor: pointer;
   overflow: hidden;
   transition: transform 160ms ease, box-shadow 160ms ease;
 }
 
-.siuu-ball-pattern,
-.siuu-ball-pattern::before,
-.siuu-ball-pattern::after {
+.siuu-ball-image {
   position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.siuu-ball-pattern {
   inset: 0;
-}
-
-.siuu-ball-pattern::before {
-  content: "";
-  inset: 16px;
-  border: 1px solid rgba(17, 20, 16, 0.08);
-}
-
-.siuu-ball-pattern::after {
-  content: "";
-  inset: 28px;
-  border: 1px dashed rgba(17, 20, 16, 0.14);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 .siuu-fab-copy {
@@ -1590,7 +1570,7 @@ blockquote {
   gap: 0;
   padding: 0.6rem 0.9rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.96);
   color: #10120f;
   box-shadow: 0 8px 18px rgba(16, 18, 15, 0.12);
 }
@@ -1608,9 +1588,7 @@ blockquote {
 .siuu-fab:hover,
 .siuu-fab:focus-visible {
   transform: translateY(-1px);
-  box-shadow:
-    0 0 0 10px rgba(201, 162, 39, 0.92),
-    0 22px 36px rgba(108, 85, 18, 0.26);
+  box-shadow: 0 22px 36px rgba(17, 20, 16, 0.24);
 }
 
 .celebration-layer {
