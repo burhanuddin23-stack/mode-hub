@@ -9,8 +9,15 @@ const homeMatchaRecipe = document.querySelector("#homeMatchaRecipe");
 const homeMatchaSource = document.querySelector("#homeMatchaSource");
 const homeSavedCount = document.querySelector("#homeSavedCount");
 const homeArchiveCopy = document.querySelector("#homeArchiveCopy");
+const breakOrb = document.querySelector("#breakOrb");
 
 let countdownTimerId = null;
+
+const GOOGLE_GAME_LINKS = [
+  "https://doodles.google/doodle/30th-anniversary-of-pac-man/",
+  "https://www.google.com/search?q=google+snake",
+  "https://www.google.com/search?q=tic+tac+toe",
+];
 
 function formatMatchLine(match) {
   return `${match.dateLabel} · ${match.team || "Ronaldo side"} vs ${match.opponent}`;
@@ -125,6 +132,17 @@ function renderSavedPreview() {
       ? `${count} saved item${count === 1 ? "" : "s"} waiting in the archive.`
       : "Stories, recipes, quotes, and match notes you keep.";
   }
+}
+
+function pickBreakLink() {
+  const index = Math.floor(Math.random() * GOOGLE_GAME_LINKS.length);
+  return GOOGLE_GAME_LINKS[index];
+}
+
+if (breakOrb) {
+  breakOrb.addEventListener("click", (event) => {
+    breakOrb.href = pickBreakLink();
+  });
 }
 
 loadHomePreview();
