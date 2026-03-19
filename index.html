@@ -15,8 +15,8 @@
           <a class="site-tab active" href="./index.html">Home</a>
           <a class="site-tab tab-ronaldo" href="./ronaldo.html">Ronaldo</a>
           <a class="site-tab" href="./matcha.html">Matcha</a>
-          <span class="site-tab placeholder">In process</span>
-          <span class="site-tab placeholder">In process</span>
+          <a class="site-tab" href="./archive.html">Archive</a>
+          <a class="site-tab placeholder" href="./in-process.html">In process</a>
         </nav>
       </header>
 
@@ -27,24 +27,46 @@
             <h1 class="home-title">Marias little world</h1>
             <p class="home-copy">What are we in the mood for today?</p>
           </div>
-          <div class="home-summary-card">
-            <p class="summary-label">Match Preview</p>
-            <h2>Ronaldo Mode</h2>
-            <div class="home-preview-meta">
-              <div class="preview-line">
-                <span>Next match</span>
-                <strong id="homeNextMatch">Loading...</strong>
+          <div class="home-summary-grid">
+            <div class="home-summary-card">
+              <p class="summary-label">Match Preview</p>
+              <h2>Ronaldo Mode</h2>
+              <div class="home-preview-meta">
+                <div class="preview-line">
+                  <span>Next match</span>
+                  <strong id="homeNextMatch" class="skeleton-block">Loading...</strong>
+                </div>
+                <div class="preview-line">
+                  <span>Countdown</span>
+                  <strong id="homeCountdown" class="skeleton-block">Calculating...</strong>
+                </div>
+                <div class="preview-line">
+                  <span>Latest score</span>
+                  <strong id="homeLatestResult" class="skeleton-block">Loading...</strong>
+                </div>
               </div>
-              <div class="preview-line">
-                <span>Countdown</span>
-                <strong id="homeCountdown">Calculating...</strong>
-              </div>
-              <div class="preview-line">
-                <span>Quick note</span>
-                <strong>Portugal captain. Al Nassr forward. CR7.</strong>
-              </div>
+              <a class="button-primary" href="./ronaldo.html">Open Ronaldo Mode</a>
             </div>
-            <a class="button-primary" href="./ronaldo.html">Open Ronaldo Mode</a>
+
+            <div class="home-summary-card matcha-preview-card">
+              <p class="summary-label">Recipe Preview</p>
+              <h2>Matcha Mode</h2>
+              <div class="home-preview-meta">
+                <div class="preview-line">
+                  <span>Fresh pick</span>
+                  <strong id="homeMatchaRecipe" class="skeleton-block">Loading...</strong>
+                </div>
+                <div class="preview-line">
+                  <span>Source</span>
+                  <strong id="homeMatchaSource" class="skeleton-block">Loading...</strong>
+                </div>
+                <div class="preview-line">
+                  <span>Saved</span>
+                  <strong id="homeSavedCount">0 items</strong>
+                </div>
+              </div>
+              <a class="button-primary matcha-button" href="./matcha.html">Open Matcha Mode</a>
+            </div>
           </div>
         </section>
 
@@ -79,23 +101,23 @@
               </p>
             </a>
 
-            <article class="shortcut-card muted">
+            <a class="shortcut-card muted" href="./in-process.html">
               <div class="shortcut-topline">
                 <span class="badge-placeholder">In process</span>
                 <span class="shortcut-label">Focus</span>
               </div>
               <h3>Discipline Board</h3>
               <p>In process.</p>
-            </article>
+            </a>
 
-            <article class="shortcut-card muted">
+            <a class="shortcut-card featured archive-shortcut" href="./archive.html">
               <div class="shortcut-topline">
-                <span class="badge-placeholder">In process</span>
+                <span class="badge-live badge-archive">Saved</span>
                 <span class="shortcut-label">Archive</span>
               </div>
               <h3>Saved Notes</h3>
-              <p>In process.</p>
-            </article>
+              <p id="homeArchiveCopy">Stories, recipes, quotes, and match notes you keep.</p>
+            </a>
           </div>
         </section>
       </main>

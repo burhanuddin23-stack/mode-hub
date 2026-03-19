@@ -10,6 +10,14 @@
     {
       "source": "/matcha",
       "destination": "/matcha.html"
+    },
+    {
+      "source": "/archive",
+      "destination": "/archive.html"
+    },
+    {
+      "source": "/in-process",
+      "destination": "/in-process.html"
     }
   ],
   "headers": [

@@ -1,4 +1,5 @@
 import { fallbackRecipes, matchaFacts, matchaFeedUrl } from "./matcha-data.js";
+import { buildSavedId, isSaved, toggleSavedItem } from "./saved-items.js";
 
 const matchaGrid = document.querySelector("#matchaGrid");
 const matchaStatus = document.querySelector("#matchaStatus");
@@ -7,13 +8,56 @@ const matchaCup = document.querySelector("#matchaCup");
 const matchaFactsList = document.querySelector("#matchaFactsList");
 
 let allRecipes = fallbackRecipes;
+const saveRegistry = new Map();
+
+function rememberSavedItem(item) {
+  saveRegistry.set(item.id, item);
+  return item;
+}
+
+function getSaveButtonMarkup(item) {
+  return `
+    <button class="save-button${isSaved(item.id) ? " active" : ""}" type="button" data-save-id="${item.id}">
+      ${isSaved(item.id) ? "Saved" : "Save"}
+    </button>
+  `;
+}
+
+function syncSaveButtons(scope = document) {
+  scope.querySelectorAll("[data-save-id]").forEach((button) => {
+    button.classList.toggle("active", isSaved(button.dataset.saveId));
+    button.textContent = isSaved(button.dataset.saveId) ? "Saved" : "Save";
+  });
+}
+
+function renderRecipeSkeleton() {
+  matchaGrid.innerHTML = Array.from({ length: 4 }, () => `
+    <article class="matcha-card skeleton-card">
+      <div class="skeleton-box skeleton-media"></div>
+      <div class="matcha-copy">
+        <div class="skeleton-line short"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line wide"></div>
+      </div>
+    </article>
+  `).join("");
+}
 
 function renderRecipes(recipes) {
   const visibleRecipes = recipes.slice(0, 6);
 
   matchaGrid.innerHTML = visibleRecipes
-    .map(
-      (recipe, index) => `
+    .map((recipe, index) => {
+      const savedItem = rememberSavedItem({
+        id: buildSavedId("recipe", recipe.title, recipe.link),
+        type: "recipe",
+        title: recipe.title,
+        description: recipe.description,
+        source: recipe.source,
+        link: recipe.link,
+      });
+
+      return `
         <article class="matcha-card">
           <a class="matcha-image-link" href="${recipe.link}" target="_blank" rel="noreferrer">
             <img
@@ -30,14 +74,18 @@ function renderRecipes(recipes) {
             </div>
             <h4>${recipe.title}</h4>
             <p class="card-description">${recipe.description}</p>
-            <a class="matcha-link" href="${recipe.link}" target="_blank" rel="noreferrer">
-              View full recipe
-            </a>
+            <div class="card-actions">
+              <a class="matcha-link" href="${recipe.link}" target="_blank" rel="noreferrer">
+                View full recipe
+              </a>
+              ${getSaveButtonMarkup(savedItem)}
+            </div>
           </div>
         </article>
-      `
-    )
+      `;
+    })
     .join("");
+  syncSaveButtons(matchaGrid);
 }
 
 function renderMatchaFact() {
@@ -86,6 +134,18 @@ function activatePour() {
 }
 
 pourButton.addEventListener("click", activatePour);
+document.addEventListener("click", (event) => {
+  const saveButton = event.target.closest("[data-save-id]");
+  if (!saveButton) return;
+  const item = saveRegistry.get(saveButton.dataset.saveId);
+  if (!item) return;
+
+  event.preventDefault();
+  toggleSavedItem(item);
+  syncSaveButtons();
+});
+window.addEventListener("saved-items-updated", () => syncSaveButtons());
+renderRecipeSkeleton();
 renderMatchaFact();
 window.setInterval(renderMatchaFact, 24 * 60 * 60 * 1000);
 loadRecipes();

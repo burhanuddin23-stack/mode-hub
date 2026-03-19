@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Saved items across Mode Hub." />
+    <title>Archive</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="archive-body">
+    <div class="page-shell">
+      <header class="article-header">
+        <a class="back-link" href="./index.html">Home</a>
+        <div class="article-title-block">
+          <h1>Archive</h1>
+          <p class="article-subtitle">Saved stories, recipes, quotes, and match notes.</p>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero panel archive-hero">
+          <div class="hero-copy">
+            <h2>Your saved corner.</h2>
+            <p class="hero-intro" id="archiveCountText">Loading saved items...</p>
+          </div>
+          <div class="hero-visual panel-subsection archive-filter-bar" id="archiveFilters"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <div>
+              <h3>Saved Collection</h3>
+            </div>
+          </div>
+          <div class="archive-grid" id="archiveGrid"></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./src/archive-page.js"></script>
+  </body>
+</html>

@@ -7,6 +7,7 @@ import {
   quotes,
   recentMatches,
 } from "./ronaldo-data.js";
+import { buildSavedId, isSaved, toggleSavedItem } from "./saved-items.js";
 
 const newsGrid = document.querySelector("#newsGrid");
 const newsStatus = document.querySelector("#newsStatus");
@@ -23,6 +24,65 @@ const siuuButton = document.querySelector("#siuuButton");
 const siuuAudio = document.querySelector("#siuuAudio");
 const celebrationLayer = document.querySelector("#celebrationLayer");
 const celebrationGif = document.querySelector("#celebrationGif");
+const saveQuoteButton = document.querySelector("#saveQuoteButton");
+
+const saveRegistry = new Map();
+let currentQuote = "";
+
+function rememberSavedItem(item) {
+  saveRegistry.set(item.id, item);
+  return item;
+}
+
+function getSaveButtonMarkup(item, label = "Save") {
+  return `
+    <button
+      class="save-button${isSaved(item.id) ? " active" : ""}"
+      type="button"
+      data-save-id="${item.id}"
+    >
+      ${isSaved(item.id) ? "Saved" : label}
+    </button>
+  `;
+}
+
+function syncSaveButtons(scope = document) {
+  scope.querySelectorAll("[data-save-id]").forEach((button) => {
+    button.classList.toggle("active", isSaved(button.dataset.saveId));
+    button.textContent = isSaved(button.dataset.saveId) ? "Saved" : "Save";
+  });
+}
+
+function renderNewsSkeleton() {
+  newsGrid.innerHTML = Array.from({ length: 4 }, () => `
+    <article class="news-card skeleton-card">
+      <div class="skeleton-box skeleton-media"></div>
+      <div class="news-copy">
+        <div class="skeleton-line short"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderMatchSkeleton() {
+  latestResultCard.innerHTML = `
+    <p class="panel-label">Latest Result</p>
+    <article class="match-card skeleton-card">
+      <div class="skeleton-line short"></div>
+      <div class="skeleton-line"></div>
+      <div class="skeleton-line wide"></div>
+    </article>
+  `;
+  matchesGrid.innerHTML = Array.from({ length: 2 }, () => `
+    <article class="match-card skeleton-card">
+      <div class="skeleton-line short"></div>
+      <div class="skeleton-line"></div>
+      <div class="skeleton-line wide"></div>
+    </article>
+  `).join("");
+}
 
 function formatFeedDate(value) {
   if (!value) {
@@ -79,8 +139,18 @@ function getNewsImage(item, index) {
 function renderNews(items, live = false) {
   newsGrid.innerHTML = items
     .slice(0, 8)
-    .map(
-      (item, index) => `
+    .map((item, index) => {
+      const savedItem = rememberSavedItem({
+        id: buildSavedId("news", item.title, item.link),
+        type: "news",
+        title: item.title,
+        description:
+          item.description || "Open the article for the latest Ronaldo coverage.",
+        source: getSourceName(item),
+        link: item.link,
+      });
+
+      return `
         <article class="news-card">
           <a class="news-image-link" href="${item.link}" target="_blank" rel="noreferrer">
             <img
@@ -101,17 +171,21 @@ function renderNews(items, live = false) {
             </p>
             <div class="news-footer">
               <span>${getSourceName(item)}</span>
-              <a href="${item.link}" target="_blank" rel="noreferrer">Open story</a>
+              <div class="card-actions">
+                <a href="${item.link}" target="_blank" rel="noreferrer">Open story</a>
+                ${getSaveButtonMarkup(savedItem)}
+              </div>
             </div>
           </div>
         </article>
-      `
-    )
+      `;
+    })
     .join("");
 
   newsStatus.textContent = live
     ? "Headlines loaded."
     : "Fallback headlines loaded.";
+  syncSaveButtons(newsGrid);
 }
 
 async function loadNews() {
@@ -159,6 +233,15 @@ function renderMatchCard(match, highlighted = false) {
       ? match.goals - match.assists
       : "-";
 
+  const savedItem = rememberSavedItem({
+    id: buildSavedId("match", `${match.team || "Ronaldo side"} vs ${match.opponent}`, match.link || `${match.dateLabel}`),
+    type: "match",
+    title: `${match.team || "Ronaldo side"} vs ${match.opponent}`,
+    description: `${match.score} · ${match.dateLabel} · ${match.competition}`,
+    source: match.competition,
+    link: match.link || "",
+  });
+
   return `
     <article class="match-card${highlighted ? " match-card-highlighted" : ""}">
       <div class="match-header">
@@ -187,6 +270,7 @@ function renderMatchCard(match, highlighted = false) {
           ? `<a class="match-more-link" href="${match.link}" target="_blank" rel="noreferrer">Know more</a>`
           : ""
       }
+      ${getSaveButtonMarkup(savedItem)}
     </article>
   `;
 }
@@ -222,6 +306,8 @@ function renderMatches(items) {
       (match) => renderMatchCard(match)
     )
     .join("");
+  syncSaveButtons(latestResultCard);
+  syncSaveButtons(matchesGrid);
 }
 
 function updateMatchCountdown(match) {
@@ -280,8 +366,23 @@ async function loadMatches() {
 function renderQuote(quotesList) {
   const dayIndex = new Date().getDate() % quotesList.length;
   const quote = quotesList[dayIndex];
+  currentQuote = quote;
   quoteText.textContent = quote;
   quoteTeaser.textContent = quote;
+  if (saveQuoteButton) {
+    const savedId = buildSavedId("quote", quote);
+    saveQuoteButton.dataset.saveId = savedId;
+    rememberSavedItem({
+      id: savedId,
+      type: "quote",
+      title: "Ronaldo Quote",
+      description: quote,
+      source: "Ronaldo Mode",
+      link: "",
+    });
+    saveQuoteButton.textContent = isSaved(savedId) ? "Saved" : "Save quote";
+    saveQuoteButton.classList.toggle("active", isSaved(savedId));
+  }
 }
 
 function renderNextMatch(match) {
@@ -366,11 +467,36 @@ function activateSiuu() {
 }
 
 function init() {
+  renderNewsSkeleton();
+  renderMatchSkeleton();
   renderQuote(quotes);
   renderQuiz(dailyQuizzes);
   loadNews();
   loadMatches();
   siuuButton.addEventListener("click", activateSiuu);
+  document.addEventListener("click", (event) => {
+    const saveButton = event.target.closest("[data-save-id]");
+    if (!saveButton) return;
+
+    const item = saveRegistry.get(saveButton.dataset.saveId);
+    if (!item) return;
+
+    event.preventDefault();
+    const saved = toggleSavedItem(item);
+    saveButton.classList.toggle("active", saved);
+    saveButton.textContent = saved
+      ? (saveButton.id === "saveQuoteButton" ? "Saved" : "Saved")
+      : (saveButton.id === "saveQuoteButton" ? "Save quote" : "Save");
+    syncSaveButtons();
+  });
+  window.addEventListener("saved-items-updated", () => {
+    syncSaveButtons();
+    if (saveQuoteButton && currentQuote) {
+      const savedId = buildSavedId("quote", currentQuote);
+      saveQuoteButton.textContent = isSaved(savedId) ? "Saved" : "Save quote";
+      saveQuoteButton.classList.toggle("active", isSaved(savedId));
+    }
+  });
 }
 
 init();
