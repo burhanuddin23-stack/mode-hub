@@ -79,7 +79,9 @@ export function initAvocadoPet(config = {}) {
     if (next.face) ui.pet.dataset.mood = next.face;
     if (next.intro) {
       intro = next.intro;
-      ui.message.textContent = intro;
+      if (ui.pet.classList.contains("active")) {
+        ui.message.textContent = intro;
+      }
     }
   }
 
