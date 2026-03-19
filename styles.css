@@ -1706,6 +1706,223 @@ blockquote {
   }
 }
 
+@media (max-width: 719px) {
+  .site-shell,
+  .page-shell {
+    width: min(calc(100% - 1rem), var(--content-width));
+    padding: 0.85rem 0 5.75rem;
+  }
+
+  .site-header,
+  .article-header,
+  .article-header-main,
+  .break-panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-tabs {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    justify-content: flex-start;
+    scrollbar-width: none;
+  }
+
+  .site-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-tab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .home-main,
+  .hero,
+  .home-hero,
+  .home-summary-grid,
+  .news-grid,
+  .matches-grid,
+  .shortcut-grid,
+  .matcha-grid,
+  .archive-grid,
+  .discipline-goal-grid,
+  .discipline-summary-grid,
+  .discipline-best-grid,
+  .discipline-entry-list,
+  .discipline-form-grid,
+  .discipline-goal-form,
+  .matches-feature-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-hero,
+  .panel,
+  .panel-subsection,
+  .home-summary-card,
+  .shortcut-card,
+  .news-card,
+  .match-card,
+  .quiz-card,
+  .discipline-goal-card,
+  .discipline-summary-card,
+  .discipline-best-card,
+  .discipline-entry-card,
+  .discipline-log-form,
+  .discipline-goal-form {
+    border-radius: 22px;
+  }
+
+  .home-title,
+  .article-title-block h1,
+  .hero-copy h2,
+  .section-heading h3,
+  .section-heading-simple h2,
+  .quiz-card h4,
+  blockquote {
+    letter-spacing: -0.04em;
+  }
+
+  .home-title {
+    max-width: 11ch;
+    font-size: clamp(2.45rem, 12vw, 4rem);
+  }
+
+  .home-copy {
+    max-width: none;
+    font-size: clamp(1.7rem, 7vw, 2.3rem);
+    line-height: 1.12;
+  }
+
+  .hero-copy h2,
+  body.ronaldo-body .hero-copy h2,
+  body.matcha-body .hero-copy h2,
+  body.discipline-body .hero-copy h2 {
+    font-size: clamp(2rem, 9vw, 3rem);
+    line-height: 0.98;
+  }
+
+  .hero-actions,
+  .card-actions,
+  .archive-card-actions,
+  .discipline-form-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primary-link,
+  .button-primary,
+  .save-button,
+  .break-close {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .metric-grid,
+  .discipline-entry-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .news-grid {
+    gap: 0.85rem;
+  }
+
+  .news-card {
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 0.85rem;
+    padding: 0.85rem;
+  }
+
+  .news-image-link,
+  .news-image {
+    height: 100%;
+    min-height: 108px;
+  }
+
+  .break-orb {
+    right: 0.8rem;
+    bottom: 0.8rem;
+    width: 112px;
+    height: 112px;
+  }
+
+  .break-orb-ring text {
+    font-size: 9px;
+  }
+
+  .break-orb-center {
+    width: 60px;
+    height: 60px;
+    font-size: 0.95rem;
+  }
+
+  .break-overlay {
+    padding: 0.7rem;
+  }
+
+  .break-panel {
+    width: 100%;
+    max-height: calc(100vh - 1.4rem);
+    padding: 1rem;
+    overflow-y: auto;
+  }
+
+  .break-choice-player {
+    min-height: 0;
+  }
+
+  .spotify-break-player {
+    min-height: 420px;
+  }
+
+  .siuu-dock {
+    right: 0.75rem;
+    bottom: 0.75rem;
+  }
+
+  .siuu-fab {
+    width: 120px;
+    height: 120px;
+  }
+
+  .siuu-fab-copy {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .siuu-fab-copy span {
+    font-size: 0.82rem;
+  }
+
+  .celebration-gif {
+    width: min(92vw, 420px);
+  }
+
+  .avocado-pet {
+    left: -2.85rem;
+    bottom: -4.75rem;
+  }
+
+  .avocado-stage,
+  .avocado-figure {
+    width: 188px;
+    height: 188px;
+  }
+
+  .avocado-bubble {
+    width: min(260px, calc(100vw - 1.1rem));
+    margin-left: 2.65rem;
+    padding: 0.9rem 0.95rem;
+  }
+
+  .avocado-message {
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+}
+
 @media (min-width: 720px) {
   .site-shell,
   .page-shell {
