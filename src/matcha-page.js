@@ -4,7 +4,7 @@ const matchaGrid = document.querySelector("#matchaGrid");
 const matchaStatus = document.querySelector("#matchaStatus");
 const pourButton = document.querySelector("#pourButton");
 const matchaCup = document.querySelector("#matchaCup");
-const matchaFactText = document.querySelector("#matchaFactText");
+const matchaFactsList = document.querySelector("#matchaFactsList");
 
 let allRecipes = fallbackRecipes;
 
@@ -41,8 +41,18 @@ function renderRecipes(recipes) {
 }
 
 function renderMatchaFact() {
-  const index = new Date().getHours() % matchaFacts.length;
-  matchaFactText.textContent = matchaFacts[index];
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 0);
+  const diff = now - start;
+  const dayOfYear = Math.floor(diff / 86400000);
+  const facts = Array.from({ length: 3 }, (_, offset) => {
+    const index = (dayOfYear + offset) % matchaFacts.length;
+    return matchaFacts[index];
+  });
+
+  matchaFactsList.innerHTML = facts
+    .map((fact) => `<p class="matcha-fact-text">${fact}</p>`)
+    .join("");
 }
 
 async function loadRecipes() {
@@ -57,18 +67,11 @@ async function loadRecipes() {
     allRecipes = recipes;
     renderRecipes(allRecipes);
 
-    const loadedAt = payload.fetchedAt
-      ? new Intl.DateTimeFormat("en", {
-          day: "2-digit",
-          month: "short",
-        }).format(new Date(payload.fetchedAt))
-      : "recently";
-
-    matchaStatus.textContent = `Recipe shelf refreshed from the web on ${loadedAt}.`;
+    matchaStatus.textContent = "Recipe shelf loaded.";
   } catch (error) {
     allRecipes = fallbackRecipes;
     renderRecipes(allRecipes);
-    matchaStatus.textContent = "Showing fallback matcha recipes because the live source is unavailable.";
+    matchaStatus.textContent = "Curated recipes loaded.";
     console.error(error);
   }
 }
@@ -84,5 +87,5 @@ function activatePour() {
 
 pourButton.addEventListener("click", activatePour);
 renderMatchaFact();
-window.setInterval(renderMatchaFact, 60 * 60 * 1000);
+window.setInterval(renderMatchaFact, 24 * 60 * 60 * 1000);
 loadRecipes();

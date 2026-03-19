@@ -18,6 +18,10 @@ function formatDateLabel(value) {
   }).format(date);
 }
 
+function formatScore(value) {
+  return Number.isFinite(value) ? String(value) : "-";
+}
+
 function formatTimeLabel(timestamp, fallbackTime) {
   if (timestamp) {
     const date = new Date(timestamp);
@@ -79,21 +83,26 @@ function mapNextMatch(event) {
 function mapRecentMatch(event) {
   const isHomeTeam = event.idHomeTeam === TEAM_ID;
   const opponent = isHomeTeam ? event.strAwayTeam : event.strHomeTeam;
-  const homeScore = Number(event.intHomeScore);
-  const awayScore = Number(event.intAwayScore);
-  const teamScore = isHomeTeam ? homeScore : awayScore;
-  const opponentScore = isHomeTeam ? awayScore : homeScore;
+  const rawHomeScore = event.intHomeScore == null || event.intHomeScore === "" ? null : Number(event.intHomeScore);
+  const rawAwayScore = event.intAwayScore == null || event.intAwayScore === "" ? null : Number(event.intAwayScore);
+  const teamScore = isHomeTeam ? rawHomeScore : rawAwayScore;
+  const opponentScore = isHomeTeam ? rawAwayScore : rawHomeScore;
   const dateLabel = formatDateLabel(event.dateEvent || event.strTimestamp);
+  const infoLink = `https://www.google.com/search?q=${encodeURIComponent(
+    `${event.strHomeTeam} vs ${event.strAwayTeam} ${event.dateEvent || ""}`
+  )}`;
 
   return {
     team: "Al Nassr",
     opponent,
-    score: `${teamScore} - ${opponentScore}`,
-    goals: teamScore,
-    assists: opponentScore,
+    score: `${formatScore(teamScore)} - ${formatScore(opponentScore)}`,
+    goals: Number.isFinite(teamScore) ? teamScore : null,
+    assists: Number.isFinite(opponentScore) ? opponentScore : null,
     dateLabel,
     competition: event.strLeague || "Competition TBD",
-    result: getResult(homeScore, awayScore, isHomeTeam),
+    result: getResult(rawHomeScore, rawAwayScore, isHomeTeam),
+    link: infoLink,
+    status: event.strStatus || event.strProgress || "",
   };
 }
 

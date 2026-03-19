@@ -40,7 +40,7 @@ body {
 }
 
 body.home-body {
-  background: #f4efeb;
+  background: #f7eeef;
 }
 
 a,
@@ -140,19 +140,6 @@ body.celebrating::after {
   margin-top: 1rem;
 }
 
-.eid-banner {
-  margin-bottom: 1rem;
-  padding: 0.75rem 1rem;
-  border-radius: 20px;
-  background: rgba(237, 242, 232, 0.88);
-  color: var(--team-green);
-  text-align: center;
-  font-family: "Times New Roman", Georgia, serif;
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 700;
-  letter-spacing: 0.03em;
-}
-
 .home-hero,
 .home-summary-card,
 .shortcut-card,
@@ -175,7 +162,7 @@ body.celebrating::after {
   display: grid;
   gap: 1rem;
   padding: 1.25rem;
-  background: rgba(255, 255, 255, 0.84);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .section-kicker,
@@ -267,8 +254,8 @@ blockquote,
   gap: 1rem;
   padding: 0.75rem 0.85rem;
   border-radius: 16px;
-  background: rgba(237, 242, 232, 0.9);
-  border: 1px solid rgba(95, 111, 82, 0.12);
+  background: #eef2ea;
+  border: 1px solid rgba(95, 111, 82, 0.16);
   color: var(--muted);
   font-size: 0.92rem;
 }
@@ -691,6 +678,16 @@ blockquote,
   font-weight: 700;
 }
 
+.match-more-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.7rem;
+  color: var(--team-red);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
 .next-match-countdown {
   margin: 0.5rem 0 0;
   color: var(--team-red);
@@ -789,8 +786,14 @@ body.matcha-body {
   border: 1px solid rgba(95, 111, 82, 0.12);
 }
 
+.matcha-facts-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
 .matcha-fact-text {
-  margin: 0.5rem 0 0;
+  margin: 0;
   color: var(--text);
   line-height: 1.6;
   font-size: 1rem;
@@ -965,10 +968,16 @@ body.matcha-body {
   border-radius: 50%;
   background: #b71c1c;
   color: #fff;
+  text-decoration: none;
   font: inherit;
   font-weight: 800;
   box-shadow: 0 22px 38px rgba(128, 22, 44, 0.28);
-  cursor: default;
+  cursor: pointer;
+}
+
+.break-orb:hover,
+.break-orb:focus-visible {
+  transform: translateY(-2px);
 }
 
 .break-orb-ring {
@@ -1017,18 +1026,25 @@ blockquote {
 }
 
 .siuu-fab {
-  min-width: 92px;
-  height: 56px;
-  padding: 0 1.1rem;
+  display: grid;
+  place-items: center;
+  width: 148px;
+  height: 148px;
+  padding: 1rem;
   border: 0;
-  border-radius: 999px;
-  background: var(--team-red);
-  color: #fff;
+  border-radius: 50%;
+  background: #c9a227;
+  color: #fffdf2;
   font: inherit;
   font-weight: 800;
-  letter-spacing: 0.05em;
-  box-shadow: 0 18px 32px rgba(200, 16, 46, 0.28);
+  text-align: center;
+  line-height: 1.2;
+  box-shadow: 0 18px 32px rgba(201, 162, 39, 0.28);
   cursor: pointer;
+}
+
+.siuu-fab span {
+  display: block;
 }
 
 .siuu-fab:active {

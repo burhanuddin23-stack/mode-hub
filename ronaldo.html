@@ -19,7 +19,6 @@
             <span class="flag-portugal" aria-hidden="true"></span>
           </div>
           <div class="article-title-block">
-          <p class="eyebrow">Ronaldo Desk</p>
           <h1>Ronaldo Mode</h1>
           <p class="article-subtitle">Confidence, football, and a little SIUU energy.</p>
           </div>
@@ -29,7 +28,6 @@
       <main>
         <section class="hero panel">
           <div class="hero-copy">
-            <p class="eyebrow">Lead Story</p>
             <h2>Confidence, discipline, and a little SIUU energy.</h2>
             <div class="hero-actions">
               <a class="primary-link" href="#news">Read news</a>
@@ -49,13 +47,8 @@
         <section class="section-block" id="news">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">Live Desk</p>
               <h3>Latest Ronaldo News</h3>
             </div>
-            <p class="section-note">
-              Live headlines are pulled from a Google News RSS feed, with mock
-              fallback cards if the request fails.
-            </p>
           </div>
           <div class="news-status" id="newsStatus">Loading latest headlines...</div>
           <div class="news-grid" id="newsGrid"></div>
@@ -64,19 +57,14 @@
         <section class="section-block" id="matches">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">Match Ledger</p>
               <h3>Recent Match Snapshot</h3>
             </div>
-            <p class="section-note">
-              Recent results showing the team scoreline from Ronaldo's current side.
-            </p>
           </div>
           <div class="matches-feature-row">
             <div class="latest-result-card" id="latestResultCard"></div>
             <article class="panel quote-panel quote-inline-panel">
               <p class="panel-label">Quote of the Day</p>
               <blockquote id="quoteText"></blockquote>
-              <p class="quote-source">Cristiano Ronaldo mode, all day.</p>
             </article>
           </div>
           <div class="matches-grid" id="matchesGrid"></div>
@@ -85,12 +73,8 @@
         <section class="section-block quiz-section" id="quiz">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">Daily Quiz</p>
               <h3>Ronaldo Trivia of the Day</h3>
             </div>
-            <p class="section-note">
-              One multiple-choice question rotates each day.
-            </p>
           </div>
 
           <article class="quiz-card">
@@ -105,7 +89,10 @@
     </div>
 
     <div class="siuu-dock">
-      <button class="siuu-fab" id="siuuButton" type="button">SIUU</button>
+      <button class="siuu-fab" id="siuuButton" type="button">
+        <span>Click here</span>
+        <span>for the Siuu</span>
+      </button>
     </div>
 
     <audio id="siuuAudio" preload="auto" src="./public/ronaldo-siuu.mp3"></audio>

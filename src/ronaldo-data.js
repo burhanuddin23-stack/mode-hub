@@ -1,5 +1,3 @@
-export const refreshHours = 6;
-
 export const fallbackNews = [
   {
     title: "Training intensity remains the headline theme",

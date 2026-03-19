@@ -2,9 +2,6 @@ import { matchesFeedUrl, nextMatch as fallbackNextMatch } from "./ronaldo-data.j
 
 const homeNextMatch = document.querySelector("#homeNextMatch");
 const homeCountdown = document.querySelector("#homeCountdown");
-const eidBanner = document.querySelector("#eidBanner");
-
-const EID_BANNER_END = "2026-03-20T16:00:00+01:00";
 
 let countdownTimerId = null;
 
@@ -49,13 +46,6 @@ function updateCountdown(timestamp) {
   tick();
 }
 
-function syncEidBanner() {
-  if (!eidBanner) return;
-  if (Date.now() > new Date(EID_BANNER_END).getTime()) {
-    eidBanner.remove();
-  }
-}
-
 async function loadHomePreview() {
   try {
     const response = await fetch(matchesFeedUrl);
@@ -76,4 +66,3 @@ async function loadHomePreview() {
 }
 
 loadHomePreview();
-syncEidBanner();

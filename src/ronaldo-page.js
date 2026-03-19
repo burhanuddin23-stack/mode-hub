@@ -78,7 +78,7 @@ function getNewsImage(item, index) {
 
 function renderNews(items, live = false) {
   newsGrid.innerHTML = items
-    .slice(0, 6)
+    .slice(0, 8)
     .map(
       (item, index) => `
         <article class="news-card">
@@ -110,8 +110,8 @@ function renderNews(items, live = false) {
     .join("");
 
   newsStatus.textContent = live
-    ? "Live headlines loaded from the news feed."
-    : "Showing fallback headlines because the live feed is unavailable.";
+    ? "Headlines loaded."
+    : "Fallback headlines loaded.";
 }
 
 async function loadNews() {
@@ -142,11 +142,11 @@ async function loadNews() {
         hour: "2-digit",
         minute: "2-digit",
       }).format(new Date(payload.fetchedAt));
-      newsStatus.textContent = `Live headlines loaded from the news feed at ${loadedAt}.`;
+      newsStatus.textContent = `Updated ${loadedAt}.`;
     }
   } catch (error) {
     renderNews(fallbackNews, false);
-    newsStatus.textContent = "Showing fallback headlines because the live feed request failed.";
+    newsStatus.textContent = "Fallback headlines loaded.";
     console.error(error);
   }
 }
@@ -182,8 +182,29 @@ function renderMatchCard(match, highlighted = false) {
         </div>
       </div>
       <p class="match-result-label">${match.result}</p>
+      ${
+        match.link
+          ? `<a class="match-more-link" href="${match.link}" target="_blank" rel="noreferrer">Know more</a>`
+          : ""
+      }
     </article>
   `;
+}
+
+function hasUsableRecentMatch(match) {
+  return Boolean(
+    match &&
+      match.opponent &&
+      match.dateLabel &&
+      match.score &&
+      /\d/.test(match.score) &&
+      match.result !== "Scheduled" &&
+      (match.score !== "0 - 0" || /match finished|ft|full time/i.test(match.status || ""))
+  );
+}
+
+function hasUsableNextMatch(match) {
+  return Boolean(match && match.opponent && match.dateLabel && match.timestamp);
 }
 
 function renderMatches(items) {
@@ -242,10 +263,12 @@ async function loadMatches() {
     }
 
     const payload = await response.json();
-    const liveRecentMatches = payload.recentMatches?.length ? payload.recentMatches : recentMatches;
-    const liveNextMatch = payload.nextMatch || nextMatch;
+    const liveRecentMatches = payload.recentMatches?.length
+      ? payload.recentMatches.filter(hasUsableRecentMatch)
+      : [];
+    const liveNextMatch = hasUsableNextMatch(payload.nextMatch) ? payload.nextMatch : nextMatch;
 
-    renderMatches(liveRecentMatches);
+    renderMatches(liveRecentMatches.length ? liveRecentMatches : recentMatches);
     renderNextMatch(liveNextMatch);
   } catch (error) {
     renderMatches(recentMatches);
