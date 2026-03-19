@@ -231,7 +231,10 @@ blockquote,
 
 .home-copy {
   margin: 0.65rem 0 0;
-  font-size: clamp(1.15rem, 2.8vw, 1.45rem);
+  font-size: clamp(1.5rem, 4.2vw, 2.3rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  max-width: 18ch;
 }
 
 .home-summary-card {
