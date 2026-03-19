@@ -1553,10 +1553,10 @@ blockquote {
 
 .siuu-ball-image {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  inset: 7px;
+  width: calc(100% - 14px);
+  height: calc(100% - 14px);
+  object-fit: contain;
   border-radius: 50%;
   user-select: none;
   -webkit-user-drag: none;
