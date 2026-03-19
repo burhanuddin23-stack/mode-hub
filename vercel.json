@@ -4,6 +4,10 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/discipline",
+      "destination": "/discipline.html"
+    },
+    {
       "source": "/ronaldo",
       "destination": "/ronaldo.html"
     },

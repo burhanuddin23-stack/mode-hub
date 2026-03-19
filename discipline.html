@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Manual-first gym and run tracker for Mode Hub." />
+    <title>Discipline Board</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="discipline-body">
+    <div class="page-shell">
+      <header class="article-header">
+        <a class="back-link" href="./index.html">Home</a>
+        <div class="article-title-block">
+          <h1>Discipline Board</h1>
+          <p class="article-subtitle">A manual-first training dashboard for gym consistency, run goals, and the numbers that keep moving.</p>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero panel discipline-hero">
+          <div class="hero-copy">
+            <h2>Run it. Lift it. Keep the week honest.</h2>
+            <p class="hero-intro">Built for manual tracking now, structured cleanly enough for future sync later.</p>
+          </div>
+          <div class="hero-visual panel-subsection discipline-hero-stats">
+            <div class="hero-stat-card">
+              <p class="hero-stat-label">Current Streak</p>
+              <p class="hero-stat-value" id="disciplineCurrentStreak">0 days</p>
+            </div>
+            <div class="hero-stat-card">
+              <p class="hero-stat-label">This Week</p>
+              <p class="hero-stat-value" id="disciplineWeeklyScore">0 / 0</p>
+              <p class="hero-stat-detail" id="disciplineWeeklyDetail">Gym 0 · Run 0 km</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <div>
+              <h3>Goals</h3>
+            </div>
+          </div>
+
+          <form class="discipline-goal-form panel-subsection" id="goalForm">
+            <label class="field">
+              <span>Weekly gym sessions</span>
+              <input type="number" min="0" max="14" id="goalWeeklyGym" />
+            </label>
+            <label class="field">
+              <span>Weekly run distance (km)</span>
+              <input type="number" min="0" step="0.5" id="goalWeeklyRunKm" />
+            </label>
+            <label class="field">
+              <span>Daily steps</span>
+              <input type="number" min="0" step="500" id="goalDailySteps" />
+            </label>
+            <label class="field">
+              <span>Target streak (days)</span>
+              <input type="number" min="0" max="365" id="goalStreak" />
+            </label>
+            <button class="button-primary" type="submit">Save goals</button>
+          </form>
+
+          <div class="discipline-goal-grid" id="goalGrid"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <div>
+              <h3>Daily Log</h3>
+            </div>
+          </div>
+
+          <form class="discipline-log-form panel" id="entryForm">
+            <div class="discipline-form-grid">
+              <label class="field">
+                <span>Date</span>
+                <input type="date" id="entryDate" required />
+              </label>
+              <label class="field field-toggle">
+                <span>Gym completed</span>
+                <input type="checkbox" id="entryGymCompleted" />
+              </label>
+              <label class="field field-toggle">
+                <span>Run completed</span>
+                <input type="checkbox" id="entryRunCompleted" />
+              </label>
+              <label class="field">
+                <span>Run distance (km)</span>
+                <input type="number" min="0" step="0.1" id="entryRunDistanceKm" />
+              </label>
+              <label class="field">
+                <span>Run time (min)</span>
+                <input type="number" min="0" step="1" id="entryRunMinutes" />
+              </label>
+              <label class="field">
+                <span>Steps</span>
+                <input type="number" min="0" step="100" id="entrySteps" />
+              </label>
+              <label class="field">
+                <span>Water (L)</span>
+                <input type="number" min="0" step="0.1" id="entryWaterLiters" />
+              </label>
+              <label class="field">
+                <span>Sleep (hours)</span>
+                <input type="number" min="0" step="0.1" id="entrySleepHours" />
+              </label>
+              <label class="field field-full">
+                <span>Notes</span>
+                <textarea id="entryNotes" rows="4" placeholder="Energy, soreness, splits, or just what happened."></textarea>
+              </label>
+            </div>
+            <div class="discipline-form-actions">
+              <p class="news-status" id="entryStatus">Entries save to this browser.</p>
+              <button class="button-primary" type="submit">Save daily log</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <div>
+              <h3>Weekly Summary</h3>
+            </div>
+          </div>
+
+          <div class="discipline-summary-grid" id="summaryGrid"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <div>
+              <h3>Personal Bests</h3>
+            </div>
+          </div>
+
+          <div class="discipline-best-grid" id="bestGrid"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <div>
+              <h3>Recent Log</h3>
+            </div>
+          </div>
+
+          <div class="discipline-entry-list" id="entryList"></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./src/discipline-page.js"></script>
+  </body>
+</html>

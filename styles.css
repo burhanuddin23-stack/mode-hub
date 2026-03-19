@@ -47,6 +47,10 @@ body.archive-body {
   background: #f5f1ed;
 }
 
+body.discipline-body {
+  background: #f2f0ec;
+}
+
 a,
 button {
   -webkit-tap-highlight-color: transparent;
@@ -367,6 +371,11 @@ blockquote,
   border-color: rgba(128, 22, 44, 0.16);
 }
 
+.discipline-shortcut {
+  border-color: rgba(95, 111, 82, 0.18);
+  background: #f4f2ee;
+}
+
 .shortcut-card.featured:first-child {
   border-color: rgba(128, 22, 44, 0.14);
   background: #faf4f4;
@@ -408,6 +417,11 @@ blockquote,
   color: #7f162c;
 }
 
+.badge-discipline {
+  background: rgba(95, 111, 82, 0.14);
+  color: var(--matcha-dark);
+}
+
 .badge-placeholder {
   color: var(--subtle);
   background: rgba(95, 111, 82, 0.1);
@@ -446,6 +460,11 @@ body.matcha-body .hero-copy h2 {
 
 body.archive-body .article-title-block h1 {
   font-size: clamp(2.35rem, 9vw, 4.2rem);
+}
+
+body.discipline-body .article-title-block h1,
+body.discipline-body .hero-copy h2 {
+  max-width: 12ch;
 }
 
 .flag-badge {
@@ -917,6 +936,128 @@ body.archive-body .article-title-block h1 {
   color: var(--matcha-dark);
   text-decoration: none;
   font-weight: 700;
+}
+
+.discipline-hero {
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.discipline-hero-stats {
+  background: #f7f5f1;
+}
+
+.discipline-goal-form,
+.discipline-log-form,
+.discipline-goal-card,
+.discipline-summary-card,
+.discipline-best-card,
+.discipline-entry-card {
+  border-radius: 24px;
+  border: 1px solid rgba(95, 111, 82, 0.12);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: var(--shadow-soft);
+}
+
+.discipline-goal-form,
+.discipline-log-form {
+  padding: 1rem;
+}
+
+.discipline-form-grid,
+.discipline-goal-form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.discipline-goal-grid,
+.discipline-summary-grid,
+.discipline-best-grid,
+.discipline-entry-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.field span {
+  color: var(--subtle);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid rgba(95, 111, 82, 0.14);
+  border-radius: 18px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+}
+
+.field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.field-toggle {
+  align-content: start;
+}
+
+.field-toggle input {
+  width: 22px;
+  min-height: 22px;
+  margin-top: 0.2rem;
+}
+
+.field-full {
+  grid-column: 1 / -1;
+}
+
+.discipline-form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.discipline-goal-card,
+.discipline-summary-card,
+.discipline-best-card,
+.discipline-entry-card {
+  padding: 1rem;
+}
+
+.discipline-goal-card h4,
+.discipline-summary-card h4,
+.discipline-best-card h4,
+.discipline-entry-card h4 {
+  margin: 0.5rem 0 0;
+  font-size: 1.4rem;
+  letter-spacing: -0.03em;
+}
+
+.discipline-entry-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.discipline-entry-metrics span {
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: #eef2ea;
 }
 
 body.matcha-body {
@@ -1428,6 +1569,14 @@ blockquote {
     grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
   }
 
+  .discipline-form-grid,
+  .discipline-goal-form,
+  .discipline-goal-grid,
+  .discipline-summary-grid,
+  .discipline-best-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .home-summary-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1436,7 +1585,8 @@ blockquote {
   .matches-grid,
   .shortcut-grid,
   .matcha-grid,
-  .archive-grid {
+  .archive-grid,
+  .discipline-entry-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1464,8 +1614,19 @@ blockquote {
   }
 
   .matcha-grid,
-  .archive-grid {
+  .archive-grid,
+  .discipline-entry-list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .discipline-goal-grid,
+  .discipline-summary-grid,
+  .discipline-best-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .discipline-form-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .shortcut-grid {
