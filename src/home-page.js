@@ -10,11 +10,27 @@ const homeMatchaRecipe = document.querySelector("#homeMatchaRecipe");
 const homeMatchaSource = document.querySelector("#homeMatchaSource");
 const homeSavedCount = document.querySelector("#homeSavedCount");
 const homeArchiveCopy = document.querySelector("#homeArchiveCopy");
+const homeDailyQuote = document.querySelector("#homeDailyQuote");
+const homeDailyQuoteAuthor = document.querySelector("#homeDailyQuoteAuthor");
 const breakOrb = document.querySelector("#breakOrb");
 const breakOverlay = document.querySelector("#breakOverlay");
 const breakClose = document.querySelector("#breakClose");
 
 let countdownTimerId = null;
+const DAILY_QUOTES = [
+  { text: "Keep going. This part will not last forever.", author: "Unknown" },
+  { text: "You do not need to have it all figured out to take the next step.", author: "Roy T. Bennett" },
+  { text: "A hard day is not a hard life.", author: "Unknown" },
+  { text: "Rest if you need to. Do not quit on yourself.", author: "Unknown" },
+  { text: "Small steps still count when the day feels heavy.", author: "Unknown" },
+  { text: "You have survived difficult days before. You can survive this one too.", author: "Unknown" },
+  { text: "Strength is sometimes just showing up again tomorrow.", author: "Unknown" },
+  { text: "It is okay to move slowly. Forward is still forward.", author: "Unknown" },
+  { text: "The fact that you are trying matters more than you think.", author: "Unknown" },
+  { text: "Even now, you are allowed to begin again.", author: "Morgan Harper Nichols" },
+  { text: "You are not behind. You are in your own process.", author: "Unknown" },
+  { text: "One calm decision can change the shape of the whole day.", author: "Unknown" },
+];
 const avocado = initAvocadoPet({
   label: "Home avo",
   face: "happy",
@@ -136,6 +152,16 @@ function renderSavedPreview() {
   }
 }
 
+function renderDailyQuote() {
+  if (!homeDailyQuote || !homeDailyQuoteAuthor) return;
+
+  const quoteIndex = new Date().getDate() % DAILY_QUOTES.length;
+  const quote = DAILY_QUOTES[quoteIndex];
+
+  homeDailyQuote.textContent = `"${quote.text}"`;
+  homeDailyQuoteAuthor.textContent = quote.author;
+}
+
 if (breakOrb) {
   breakOrb.addEventListener("click", (event) => {
     event.preventDefault();
@@ -163,4 +189,5 @@ if (breakOverlay) {
 loadHomePreview();
 loadMatchaPreview();
 renderSavedPreview();
+renderDailyQuote();
 window.addEventListener("saved-items-updated", renderSavedPreview);
