@@ -155,7 +155,7 @@ function renderSavedPreview() {
 function renderDailyQuote() {
   if (!homeDailyQuote || !homeDailyQuoteAuthor) return;
 
-  const quoteIndex = new Date().getDate() % DAILY_QUOTES.length;
+  const quoteIndex = Math.floor(Math.random() * DAILY_QUOTES.length);
   const quote = DAILY_QUOTES[quoteIndex];
 
   homeDailyQuote.textContent = `"${quote.text}"`;
